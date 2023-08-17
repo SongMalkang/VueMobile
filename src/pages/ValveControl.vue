@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-[100vh]">
     <AppHeader />
     <div class="Container">
       <div class="flex flex-row relative mt-[3vh] justify-center">

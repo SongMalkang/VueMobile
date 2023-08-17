@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppHeader />
-    <div class="bg-white w-[100vw] mt-[2vh] rounded-lg h-[94vh] flex flex-col justify-between align-middle text-center overflow-hidden">
+    <div class="bg-white w-[100vw] mt-[2vh] rounded-lg h-[93vh] flex flex-col justify-between align-middle text-center overflow-hidden">
 
       <div class="overflow-scrollw-[100vw] h-[75vh] px-[2vw] flex flex-col justify-between align-middle text-center">
         <div class="w-[96vw] h-[5vh] rounded-xl flex flex-row justify-between">

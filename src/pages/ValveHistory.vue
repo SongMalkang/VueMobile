@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-[100vh] bg-white text-black">
     <AppHeader />
     <div class="flex flex-row relative mt-[3vh] ml-[6vw]">
       <HalfSelectBox class="px-4 mr-[1.5vw]">
@@ -24,33 +24,30 @@
 
     <HalfSelectBox class="px-4 ml-[6vw] my-[2vh]">
       <option>기간 설정</option>
-      <option>상태: 정상</option>
-      <option>상태: 경고</option>
-      <option>상태: 위험</option>
     </HalfSelectBox>
 
-    <div>
-      <table class="w-[96vw] mt-2 ml-[2vw] bg-zinc-200 border-[1px] border-zinc-400 mb-10 text-xs">
-        <thead>
-          <th class="px-1 border-[2px] border-zinc-300 bg-zinc-200 w-[18vw]">일시</th>
-          <th class="px-1 border-[2px] border-zinc-300 bg-zinc-200 ">장비<br />번호</th>
-          <th class="px-1 border-[2px] border-zinc-300 bg-zinc-200 ">도크</th>
-          <th class="px-1 border-[2px] border-zinc-300 bg-zinc-200 ">구역</th>
-          <th class="px-1 border-[2px] border-zinc-300 bg-zinc-200 ">지번</th>
-          <th class="px-1 border-[2px] border-zinc-300 bg-zinc-200 ">제어<br />구분</th>
-          <th class="px-1 border-[2px] border-zinc-300 bg-zinc-200 ">이력</th>
-          <th class="px-1 border-[2px] border-zinc-300 bg-zinc-200 ">제어자</th>
+    <div class="overflow-y-scroll">
+      <table class="w-[96vw] mt-2 ml-[2vw] bg-zinc-200 border-[1px] border-zinc-400 mb-10 text-xs ">
+        <thead class="text-white">
+          <th class="px-1 py-1 border-[1px] border-sky-700 font-bold bg-sky-600 w-[18vw]">일시</th>
+          <th class="px-1 py-1 border-[1px] border-sky-700 font-bold bg-sky-600 ">장비<br />번호</th>
+          <th class="px-1 py-1 border-[1px] border-sky-700 font-bold bg-sky-600 ">도크</th>
+          <th class="px-1 py-1 border-[1px] border-sky-700 font-bold bg-sky-600 ">구역</th>
+          <th class="px-1 py-1 border-[1px] border-sky-700 font-bold bg-sky-600 ">지번</th>
+          <th class="px-1 py-1 border-[1px] border-sky-700 font-bold bg-sky-600 ">제어<br />구분</th>
+          <th class="px-1 py-1 border-[1px] border-sky-700 font-bold bg-sky-600 ">이력</th>
+          <th class="px-1 py-1 border-[1px] border-sky-700 font-bold bg-sky-600 ">제어자</th>
         </thead>
         <tbody class="bg-zinc-100">
           <tr class="border-y-2 text-red-600 font-bold">
-            <td class="text-[2.8vw] py-2 border-2 border-zinc-300">23.06.20 <br /> 13:20:00</td>
-            <td class="text-[2.8vw] py-2 border-2 border-zinc-300">E0001</td>
-            <td class="text-[2.8vw] py-2 border-2 border-zinc-300">8D</td>
-            <td class="text-[2.8vw] py-2 border-2 border-zinc-300">서편</td>
-            <td class="text-[2.8vw] py-2 border-2 border-zinc-300">45</td>
-            <td class="text-[2.8vw] py-2 border-2 border-zinc-300">예약</td>
-            <td class="text-[2.8vw] py-2 border-2 border-zinc-300">산소 <br />열림</td>
-            <td class="text-[2.8vw] py-2 border-2 border-zinc-300">건조3부 <br />홍길동</td>
+            <td class="text-[2.8vw] py-2 border-[1px] border-zinc-300">23.06.20 <br /> 13:20:00</td>
+            <td class="text-[2.8vw] py-2 border-[1px] border-zinc-300">E0001</td>
+            <td class="text-[2.8vw] py-2 border-[1px] border-zinc-300">8D</td>
+            <td class="text-[2.8vw] py-2 border-[1px] border-zinc-300">서편</td>
+            <td class="text-[2.8vw] py-2 border-[1px] border-zinc-300">45</td>
+            <td class="text-[2.8vw] py-2 border-[1px] border-zinc-300">예약</td>
+            <td class="text-[2.8vw] py-2 border-[1px] border-zinc-300">산소 <br />열림</td>
+            <td class="text-[2.8vw] py-2 border-[1px] border-zinc-300">건조3부 <br />홍길동</td>
           </tr>
         </tbody>
       </table>
