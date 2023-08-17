@@ -1,0 +1,246 @@
+<template>
+  <div>
+    <AppHeader />
+    <div class="bg-white w-[100vw] mt-[2vh] rounded-lg h-[94vh] flex flex-col justify-between align-middle text-center overflow-hidden">
+
+      <div class="overflow-scrollw-[100vw] h-[75vh] px-[2vw] flex flex-col justify-between align-middle text-center">
+        <div class="w-[96vw] h-[5vh] rounded-xl flex flex-row justify-between">
+          <HalfSelectBox class="px-4 mr-[2vw]">
+            <option>도크 구분</option>
+            <option>1도크</option>
+            <option>2도크</option>
+            <option>3도크</option>
+            <option>4도크</option>
+            <option>5도크</option>
+            <option>8도크</option>
+            <option>9도크</option>
+            <option>H도크</option>
+          </HalfSelectBox>
+
+          <button class="w-[44vw] h-[5vh] mx-[1vw] rounded-xl bg-sky-600 text-white font-bold" @click="goToDetail">
+            상세보기
+          </button>
+        </div>
+
+        <div class="w-[96vw] h-[40vh] rounded-xl bg-slate-100 overflow-hidden">
+
+          <div class="h-[5vh] text-xl font-bold bg-sky-600 justify-center align-middle text-center flex flex-row">
+            <span class="flex items-center text-white">매니폴드 밸브 현황</span>
+          </div>
+
+          <div class="w-[96vw] h-[30vh] mt-[1.5vh] flex flex-col justify-between">
+
+            <div class="flex flex-row w-[96vw] h-[15vh] px-[2vw] justify-between align-middle">
+              <div class="flex flex-col w-[25vw] mt-[0.5vh] h-[13vh] bg-green-500 justify-center align-middle text-black overflow-hidden rounded-2xl">
+                <!-- 아이콘영역 -->
+                <img src="../assets/Icons/icon_o2.png" class="text-white w-[18vw] ml-[3.6vw] flex flex-row" />
+                <span class="font-bold text-xl">산소</span>
+              </div>
+              <div class="w-[65vw] mt-[0.5vh] h-[13vh] py-[1vh]">
+                <!-- 테이블영역 -->
+                <table class="table table-auto mt-[1.7vh] text-black">
+                  <thead class="flex flex-row h-[3vh] justify-between">
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">전체</td>
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">열림</td>
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">닫힘</td>
+                  </thead>
+                  <tbody class="flex flex-row h-[3vh] justify-between">
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                      {{ totalCounts.oxygenOpened + totalCounts.oxygenClosed }}
+                    </td>
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                      {{ totalCounts.oxygenOpened }}
+                    </td>
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                      {{ totalCounts.oxygenClosed }}
+                    </td>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="flex flex-row w-[96vw] h-[15vh] mt-[2vh] px-[2vw] justify-between align-middle">
+              <div class="flex flex-col w-[25vw] h-[13vh] bg-orange-600 justify-center align-middle text-black overflow-hidden rounded-2xl">
+                <!-- 아이콘영역 -->
+                <img src="../assets/Icons/icon_ethy.png" class="text-white w-[18vw] ml-[3.6vw] flex flex-row" />
+                <span class="font-bold text-xl">에틸렌</span>
+              </div>
+              <div class="w-[65vw] mt-[0.5vh] h-[13vh] py-[1vh]">
+                <!-- 테이블영역 -->
+                <table class="table table-auto mt-[1.7vh] text-black">
+                  <thead class="flex flex-row h-[3vh] justify-between">
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">전체</td>
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">열림</td>
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">닫힘</td>
+                  </thead>
+                  <tbody class="flex flex-row h-[3vh] justify-between">
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                      {{ totalCounts.ethyleneOpened + totalCounts.ethyleneClosed }}
+                    </td>
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                      {{ totalCounts.ethyleneOpened }}
+                    </td>
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                      {{ totalCounts.ethyleneClosed }}
+                    </td>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+          
+
+        </div>
+
+        <div class="w-[96vw] h-[22vh] rounded-xl bg-slate-100 overflow-hidden">
+          <!-- 제어 장치 합계 -->
+          <div class="h-[5vh] text-xl font-bold bg-sky-600 justify-center align-middle text-center flex flex-row">
+            <span class="flex items-center text-white" @click="recentValveLog">제어 장치 현황</span>
+          </div>
+
+          <div class="flex flex-row w-[96vw] h-[15vh] mt-[2vh] px-[2vw] justify-between align-middle">
+              <div class="flex flex-col w-[25vw] h-[13vh] bg-sky-600 justify-center align-middle text-black overflow-hidden rounded-2xl">
+                <!-- 아이콘영역 -->
+                <img src="../assets/Icons/icon_device.png" class="w-[18vw] ml-[3.6vw] flex flex-row" />
+                <span class="font-bold text-xl">장치 상태</span>
+              </div>
+              <div class="w-[65vw] mt-[0.5vh] h-[13vh] py-[1vh]">
+                <!-- 테이블영역 -->
+                <table class="table table-auto mt-[1.7vh] text-black">
+                  <thead class="flex flex-row h-[3vh] justify-between">
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">전체</td>
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">정상</td>
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">점검</td>
+                  </thead>
+                  <tbody class="flex flex-row h-[3vh] justify-between">
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                      {{ totalCounts.ethyleneOpened + totalCounts.ethyleneClosed }}
+                    </td>
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                      {{ totalCounts.ethyleneOpened + totalCounts.ethyleneClosed - totalCounts.valveStatusZero }}
+                    </td>
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                      {{ totalCounts.valveStatusZero }}
+                    </td>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</template>
+
+<script>
+import AppHeader from '../components/AppHeader.vue';
+import HalfSelectBox from '../components/HalfSelectBox.vue';
+import axios from 'axios'
+
+export default {
+  components: { AppHeader, HalfSelectBox },
+  data() {
+    return {
+      dockCounts: new Map(),
+      totalCounts: {
+        oxygenOpened: 0,
+        oxygenClosed: 0,
+        ethyleneOpened: 0,
+        ethyleneClosed: 0,
+        valveStatusZero: 0
+      },
+      interval: null,
+      currentPath: '/valve/monitoring'
+    };
+  },
+  methods: {
+    goToDetail() {
+      this.$router.push('/valve/detail');
+    },
+    async recentValveLog() {
+      // if(this.currentPath !== '/valve/monitoring'){
+      //   return ;
+      // }
+
+      try {
+        const res = await axios.get("/api/valve/log/recent");
+        const result = res.data;
+
+        const docks = ['D1', 'D2', 'D3', 'D4', 'D5', 'D8', 'D9', 'DH'];
+
+        docks.forEach(dock => {
+          this.dockCounts.set(dock, {
+            oxygenOpened: 0,
+            oxygenClosed: 0,
+            ethyleneOpened: 0,
+            ethyleneClosed: 0,
+            valveStatusZero: 0
+          });
+        });
+
+        this.totalCounts = {
+          oxygenOpened: 0,
+          oxygenClosed: 0,
+          ethyleneOpened: 0,
+          ethyleneClosed: 0,
+          valveStatusZero: 0
+        }
+
+        result.forEach(item => {
+          const dock = item.DQ_NO;
+          const oxygenValve = item.VALVE_0;
+          const ethyleneValve = item.VALVE_1;
+          const valveStatus = item.DEVICE_STATUS;
+
+          if (this.dockCounts.has(dock)) {
+            if (oxygenValve === 1 && valveStatus !== 0) {
+              this.dockCounts.get(dock).oxygenOpened++;
+              this.totalCounts.oxygenOpened++;
+            } else {
+              this.dockCounts.get(dock).oxygenClosed++;
+              this.totalCounts.oxygenClosed++;
+            }
+
+            if (ethyleneValve === 1 && valveStatus !== 0) {
+              this.dockCounts.get(dock).ethyleneOpened++;
+              this.totalCounts.ethyleneOpened++;
+            } else {
+              this.dockCounts.get(dock).ethyleneClosed++;
+              this.totalCounts.ethyleneClosed++;
+            }
+
+            if (valveStatus === 0) {
+              this.dockCounts.get(dock).valveStatusZero++;
+              this.totalCounts.valveStatusZero++;
+            }
+          }
+        });
+
+        console.log('Vavle Status Refreshed!')
+
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+  mounted() {
+    this.recentValveLog()
+    this.interval = setInterval(() => {
+      this.recentValveLog();
+    }, 5000);
+    this.currentPath = this.$route.path;
+  },
+  beforeDestroy() {
+    console.log('Valve Page Destroyed Success')
+    clearInterval(this.interval);
+  }
+}
+
+</script>
+
+<style lang="scss" scoped>
+
+</style>

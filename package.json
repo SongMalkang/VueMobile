@@ -1,0 +1,35 @@
+{
+  "name": "vite-vue-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "serve": "vite --host 10.8.0.34 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@heroicons/vue": "^2.0.18",
+    "@tailwindcss/forms": "^0.5.3",
+    "@vue-hero-icons/outline": "^1.7.2",
+    "@vue-hero-icons/solid": "^1.7.2",
+    "apexcharts": "^3.41.0",
+    "autoprefixer": "^10.4.14",
+    "axios": "^1.4.0",
+    "bootstrap": "^5.3.1",
+    "bootstrap-vue": "^2.23.1",
+    "popper.js": "^1.16.1",
+    "postcss": "^8.4.24",
+    "sass": "^1.63.4",
+    "tailwindcss": "^3.3.2",
+    "vue": "^3.3.4",
+    "vue-apexcharts": "^1.6.2",
+    "vue-router": "^4.2.2",
+    "vue3-apexcharts": "^1.4.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "vite": "^4.3.9"
+  }
+}

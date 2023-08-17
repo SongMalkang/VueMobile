@@ -1,0 +1,39 @@
+{
+  "name": "hhi_server",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "pkg . --out-path bin"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.17.1",
+    "http": "^0.0.1-security",
+    "moment": "^2.29.4",
+    "mysql2": "^3.1.2",
+    "oracledb": "^6.0.3",
+    "router": "^1.3.7"
+  },
+  "author": "hancom",
+  "license": "ISC",
+  "keywords": [
+    "nodejs",
+    "express",
+    "mysql",
+    "restapi"
+  ],
+  "devDependencies": {
+    "@types/node": "^18.14.6",
+    "pkg": "^5.8.0"
+  },
+  "pkg": {
+    "scripts": "*.js",
+    "targets": [
+      "node12-linux"
+    ]
+  }
+}
