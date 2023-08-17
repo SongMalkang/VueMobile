@@ -139,7 +139,7 @@ app.get('/gas/log/recent', async (req, res) => {
       WHERE t.SENS_NO = sub.SENS_NO AND t.CHK_TIME = sub.max_CHK_TIME
       AND   t.ship_no = xx.ship(+)
         `
-    ); // 개발 완료시점에, 미수신 관련 로직을 추가 할 것 (검색 범위도 줄이기)
+    ); // 개발 완료시점에, 미수신 관련 로직을 추가 할 것
 
     const formattedData = formatResult(result);
     res.status(200).json(formattedData);
