@@ -14,25 +14,49 @@
           <th class="px-1 border-[2px] border-zinc-300 bg-zinc-200 ">조치</th>
         </thead>
         <tbody class="bg-zinc-100">
+          <tr class="border-y-2 text-[3vw]">
+            <td class="py-2 border-2 border-zinc-300">23.06.20 <br /> 13:20</td>
+            <td class="py-2 border-2 border-zinc-300">E0001</td>
+            <td class="py-2 border-2 border-zinc-300">3291</td>
+            <td class="py-2 border-2 border-zinc-300">E/R M/E L.O.WUMP TK <br /> No.1 LFO S.V.T</td>
+            <td class="py-2 border-2 border-zinc-300">OK</td>
+            <td class="py-2 border-2 border-zinc-300">( O )</td>
+          </tr>
           <tr class="border-y-2 text-red-600 font-bold text-[3vw]">
             <td class="py-2 border-2 border-zinc-300">23.06.20 <br /> 13:20</td>
             <td class="py-2 border-2 border-zinc-300">E0001</td>
             <td class="py-2 border-2 border-zinc-300">3291</td>
             <td class="py-2 border-2 border-zinc-300">E/R M/E L.O.WUMP TK <br /> No.1 LFO S.V.T</td>
-            <td class="py-2 border-2 border-zinc-300">CH4 <br />위험</td>
+            <td class="py-2 border-2 border-zinc-300">OK</td>
             <td class="py-2 border-2 border-zinc-300">( X )</td>
+          </tr>
+          <tr class="border-y-2 text-[3vw]">
+            <td class="py-2 border-2 border-zinc-300">23.06.20 <br /> 13:20</td>
+            <td class="py-2 border-2 border-zinc-300">E0001</td>
+            <td class="py-2 border-2 border-zinc-300">3291</td>
+            <td class="py-2 border-2 border-zinc-300">E/R M/E L.O.WUMP TK <br /> No.1 LFO S.V.T</td>
+            <td class="py-2 border-2 border-zinc-300">OK</td>
+            <td class="py-2 border-2 border-zinc-300">( O )</td>
+          </tr>
+          <tr class="border-y-2 text-[3vw]">
+            <td class="py-2 border-2 border-zinc-300">23.06.20 <br /> 13:20</td>
+            <td class="py-2 border-2 border-zinc-300">E0001</td>
+            <td class="py-2 border-2 border-zinc-300">3291</td>
+            <td class="py-2 border-2 border-zinc-300">E/R M/E L.O.WUMP TK <br /> No.1 LFO S.V.T</td>
+            <td class="py-2 border-2 border-zinc-300">OK</td>
+            <td class="py-2 border-2 border-zinc-300">( O )</td>
           </tr>
         </tbody>
       </table>
 
-      <div class="hidden">
-        <div class="flex flex-row bg-sky-600 text-white w-[96vw] h-[4vh] text-lg font-bold justify-center text-center rounded-xl">조치 내용</div>
-        <table class="w-[96vw] mt-2 bg-zinc-200 border-[1px] border-zinc-400">
+      <div class="">
+        <div class="flex flex-row justify-items-center bg-sky-600 text-white w-[96vw] h-[4vh] text-lg font-bold justify-center text-center rounded-xl">조치 내용</div>
+        <table class="w-[96vw] mt-2 bg-sky-600 border-[1px] border-zinc-400">
           <thead>
-            <th>구분</th>
-            <th>내용</th>
+            <th class="py-2">구분</th>
+            <th class="py-2">내용</th>
           </thead>
-          <tbody class="bg-zinc-100">
+          <tbody class="bg-zinc-100 text-black">
             <tr>
               <td class="h-[5vh] border-2 border-zinc-300">성명</td>
               <td class="h-[5vh] border-2 border-zinc-300">홍길동</td>

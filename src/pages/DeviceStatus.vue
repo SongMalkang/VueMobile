@@ -50,7 +50,7 @@
               </tr>
               <tr>
                   <td class="py-2 border-[1px] border-sky-700">F0004</td>
-                  <td class="py-2 border-[1px] border-sky-700 text-yellow-600 font-bold">배터리 부족</td>
+                  <td class="py-2 border-[1px] border-sky-700 text-red-600 font-bold">점검 대기</td>
                   <td class="py-2 border-[1px] border-sky-700">23-08-18 17:31:00</td>
                   <td class="py-2 border-[1px] border-sky-700 text-sky-600 font-bold">조회</td>
               </tr>

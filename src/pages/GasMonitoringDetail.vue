@@ -24,14 +24,14 @@
         </HalfSelectBox>
       </div>
 
-      <table class="table-auto w-[94vw] overflow-y-scroll mt-5 text-xs">
+      <table class="table-auto w-[94vw] overflow-y-scroll mt-5 text-[3.5vw] text-white text-ellipsis">
         <thead>
-          <th class="px-1 border-y-2 border-sky-900 bg-zinc-200 w-3/12">수신 시각</th>
-          <th class="px-1 border-y-2 border-sky-900 bg-zinc-200 w-1/12">장비</th>
-          <th class="px-1 border-y-2 border-sky-900 bg-zinc-200 w-1/12">호선</th>
-          <th class="px-1 border-y-2 border-sky-900 bg-zinc-200 w-5/12">위치</th>
-          <th class="px-1 border-y-2 border-sky-900 bg-zinc-200 w-1/12">가스</th>
-          <th class="px-1 border-y-2 border-sky-900 bg-zinc-200 w-1/12">장치</th>
+          <th class="px-1 border-y-2 border-sky-900 bg-sky-600 py-2 w-3/12">수신 시각</th>
+          <th class="px-1 border-y-2 border-sky-900 bg-sky-600 py-2 w-1/12">장비</th>
+          <th class="px-1 border-y-2 border-sky-900 bg-sky-600 py-2 w-1/12">호선</th>
+          <th class="px-1 border-y-2 border-sky-900 bg-sky-600 py-2 w-5/12">위치</th>
+          <th class="px-1 border-y-2 border-sky-900 bg-sky-600 py-2 w-1/12">가스</th>
+          <th class="px-1 border-y-2 border-sky-900 bg-sky-600 py-2 w-1/12">장치</th>
         </thead>
         <tbody>
           <transition-group name="blink">
