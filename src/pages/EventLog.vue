@@ -19,23 +19,23 @@
             <td class="py-2 border-2 border-zinc-300">E0001</td>
             <td class="py-2 border-2 border-zinc-300">3291</td>
             <td class="py-2 border-2 border-zinc-300">E/R M/E L.O.WUMP TK <br /> No.1 LFO S.V.T</td>
-            <td class="py-2 border-2 border-zinc-300">OK</td>
+            <td class="py-2 border-2 border-zinc-300">CO2</td>
             <td class="py-2 border-2 border-zinc-300">( O )</td>
           </tr>
           <tr class="border-y-2 text-red-600 font-bold text-[3vw]">
             <td class="py-2 border-2 border-zinc-300">23.06.20 <br /> 13:20</td>
-            <td class="py-2 border-2 border-zinc-300">E0001</td>
+            <td class="py-2 border-2 border-zinc-300">E0002</td>
             <td class="py-2 border-2 border-zinc-300">3291</td>
             <td class="py-2 border-2 border-zinc-300">E/R M/E L.O.WUMP TK <br /> No.1 LFO S.V.T</td>
-            <td class="py-2 border-2 border-zinc-300">OK</td>
+            <td class="py-2 border-2 border-zinc-300">CH4<br />초과</td>
             <td class="py-2 border-2 border-zinc-300">( X )</td>
           </tr>
           <tr class="border-y-2 text-[3vw]">
             <td class="py-2 border-2 border-zinc-300">23.06.20 <br /> 13:20</td>
-            <td class="py-2 border-2 border-zinc-300">E0001</td>
+            <td class="py-2 border-2 border-zinc-300">E0003</td>
             <td class="py-2 border-2 border-zinc-300">3291</td>
             <td class="py-2 border-2 border-zinc-300">E/R M/E L.O.WUMP TK <br /> No.1 LFO S.V.T</td>
-            <td class="py-2 border-2 border-zinc-300">OK</td>
+            <td class="py-2 border-2 border-zinc-300">CO2</td>
             <td class="py-2 border-2 border-zinc-300">( O )</td>
           </tr>
           <tr class="border-y-2 text-[3vw]">
@@ -43,7 +43,7 @@
             <td class="py-2 border-2 border-zinc-300">E0001</td>
             <td class="py-2 border-2 border-zinc-300">3291</td>
             <td class="py-2 border-2 border-zinc-300">E/R M/E L.O.WUMP TK <br /> No.1 LFO S.V.T</td>
-            <td class="py-2 border-2 border-zinc-300">OK</td>
+            <td class="py-2 border-2 border-zinc-300">CH4</td>
             <td class="py-2 border-2 border-zinc-300">( O )</td>
           </tr>
         </tbody>
@@ -59,24 +59,26 @@
           <tbody class="bg-zinc-100 text-black">
             <tr>
               <td class="h-[5vh] border-2 border-zinc-300">성명</td>
-              <td class="h-[5vh] border-2 border-zinc-300">홍길동</td>
+              <td class="h-[5vh] border-2 border-zinc-300">허재석<br /><span class="text-sm font-bold text-sky-400">(로그인 정보 자동기입)</span></td>
             </tr>
             <tr>
               <td class="h-[5vh] border-2 border-zinc-300">사번</td>
-              <td class="h-[5vh] border-2 border-zinc-300">BP20000</td>
+              <td class="h-[5vh] border-2 border-zinc-300">BP28602<br /><span class="text-sm font-bold text-sky-400">(로그인 정보 자동기입)</span></td>
             </tr>
             <tr>
               <td class="h-[5vh] border-2 border-zinc-300">소속</td>
-              <td class="h-[5vh] border-2 border-zinc-300">건조1부</td>
+              <td class="h-[5vh] border-2 border-zinc-300">협력사<br /><span class="text-sm font-bold text-sky-400">(로그인 정보 자동기입)</span></td>
             </tr>
             <tr>
               <td class="h-[5vh] border-2 border-zinc-300">조치 사항</td>
-              <td class="h-[5vh] w-[75vw] text-sm border-2 border-zinc-300">현장 환기 수행 및 재 측정 후 작업자 진입</td>
+              <td class="h-[5vh] w-[75vw] text-sm border-2 border-zinc-300">
+                <input class="bg-white text-center w-full h-[4vh]" placeholder="현장 환기 수행 및 재 측정 후 작업자 진입..." />
+              </td>
             </tr>
           </tbody>
         </table>
 
-        <FullButtons>
+        <FullButtons @click="showAlert()">
           <span>현장 조치 등록</span>
         </FullButtons>
       </div>
@@ -96,6 +98,10 @@ import FullButtons from '../components/FullButtons.vue';
       goBack() {
         this.$router.go(-1)
       },
+      
+      showAlert() {
+        window.alert('현장 조치사항이 등록되었습니다.');
+      }
     },
   }
 

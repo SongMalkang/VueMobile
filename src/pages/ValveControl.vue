@@ -44,7 +44,7 @@ import HalfSelectBox from '../components/HalfSelectBox.vue'
 import ValveStatusCard from '../components/ValveStatusCard.vue';
 
   export default {
-    components: { AppHeader, HalfSelectBox, ValveStatusCard }
+    components: { AppHeader, HalfSelectBox, ValveStatusCard },
   }
 </script>
 

@@ -16,17 +16,17 @@
       </div>
 
       <div class="flex flex-row justify-between align-middle ml-[6vw] rounded-xl w-[75vw] mt-[2vh] h-[6vh]overflow-hidden text-white font-bold text-xl" v-if="title !== '전체'" >
-          <button class="px-[13.5vw] justify-center rounded-xl align-middle flex flex-row bg-green-500">
+          <button @click="showConfirmDialog()" class="px-[13.5vw] justify-center rounded-xl align-middle flex flex-row bg-green-500">
             <span class="mt-1 font-bold">열기</span>
           </button>
-          <button class="px-[13.5vw] justify-center rounded-xl align-middle flex flex-row bg-orange-500">
+          <button @click="showConfirmDialog()" class="px-[13.5vw] justify-center rounded-xl align-middle flex flex-row bg-orange-500">
             <span class="mt-1 font-bold">닫기</span>
           </button>
       </div>
 
       <div v-if="title === '전체'" class="flex flex-col justify-center h-[18vh] align-middle text-2xl font-bold">
-        <button class="py-2 bg-green-500 text-white font-bold">열기</button>
-        <button class="py-2 mt-[1vh] bg-orange-600 text-white font-bold">닫기</button>
+        <button @click="showConfirmDialog()" class="py-2 bg-green-500 text-white font-bold">열기</button>
+        <button @click="showConfirmDialog()" class="py-2 mt-[1vh] bg-orange-600 text-white font-bold">닫기</button>
       </div>
 
     </div>
@@ -40,6 +40,21 @@ export default {
     return {
     };
   },
+  method: {
+    showConfirmDialog() {
+      const confirmation = window.confirm('밸브를 제어하시겠습니까?');
+      console.log('haha')
+
+      if (confirmation) {
+        this.registerDemolition();
+          window.alert('밸브 제어신호가 정상 송신 되었습니다.');
+      } else {
+      }
+    },
+    registerDemolition() {
+      console.log('Demolition registered');
+    }
+  }
 };
 </script>
 

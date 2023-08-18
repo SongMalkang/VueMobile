@@ -23,7 +23,7 @@
     </div>
 
     <HalfSelectBox class="px-4 ml-[6vw] my-[2vh]">
-      <option>기간 설정</option>
+      <option @click="popup=true">기간 설정</option>
     </HalfSelectBox>
 
     <div class="overflow-y-scroll">
@@ -80,8 +80,13 @@ import AppHeader from '../components/AppHeader.vue';
 import HalfSelectBox from '../components/HalfSelectBox.vue';
 
   export default {
-    components: { AppHeader, HalfSelectBox }
-}
+    components: { AppHeader, HalfSelectBox },
+    data() {
+      return {
+        popup: true,
+      }
+    }
+  }
 </script>
 
 <style lang="scss" scoped>
