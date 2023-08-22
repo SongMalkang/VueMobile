@@ -19,7 +19,7 @@
             <option>H도크</option>
           </HalfSelectBox>
 
-          <button class="w-[44vw] h-[5vh] mx-[1vw] text-[7vw] rounded-xl bg-red-600 text-white font-bold" @click="goToDetail">
+          <button class="w-[44vw] h-[5vh] mx-[1vw] text-[7vw] rounded-xl bg-red-600 text-white font-bold" @click="controlPopup=true">
             밸브 제어
           </button>
         </div>
@@ -132,7 +132,23 @@
         </div>
 
       </div>
+      
+      <div v-if="controlPopup" class="absolute bg-sky-600 text-white w-[100vw] h-[30vh] top-[12vh]">
+        <div class="flex flex-col text-left px-[5vw] py-[2vh]">
+          <span class="text-[5vw] text-white font-bold">사용자 사번 : BP20862</span>
+          <span class="text-[5vw] text-white font-bold">사용자 이름 : 허재석</span>
+          <br />
 
+          <div class="text-white font-bold text-[5vw]">
+            밸브 제어가 가능한 작업자입니다. <br /> 제어 페이지로 이동하시겠습니까?
+          </div>
+          <div class="flex flex-row w-full justify-between text-white font-bold py-[3vh]">
+            <button @click="goToDetail" class="py-[1vh] w-[30vw] font-bold text-[5vw] bg-green-600 border-2">확인</button>
+            <button @click="this.controlPopup=false" class="py-[1vh] w-[30vw] font-bold text-[5vw] bg-orange-600 border-2">취소</button>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -155,11 +171,13 @@ export default {
         valveStatusZero: 0
       },
       interval: null,
-      currentPath: '/valve/monitoring'
+      currentPath: '/valve/monitoring',
+      controlPopup: false
     };
   },
   methods: {
     goToDetail() {
+      this.controlPopup = false;
       this.$router.push('/valve/control');
     },
     async recentValveLog() {
@@ -235,10 +253,10 @@ export default {
     }, 5000);
     this.currentPath = this.$route.path;
   },
-  beforeDestroy() {
-    console.log('Valve Page Destroyed Success')
-    clearInterval(this.interval);
-  }
+  // beforeDestroy() {
+  //   console.log('Valve Page Destroyed Success')
+  //   clearInterval(this.interval);
+  // }
 }
 
 </script>

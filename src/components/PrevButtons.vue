@@ -1,7 +1,7 @@
 <template>
   <button class="flex flex-row rounded-2xl bg-sky-600 w-[20vw] text-white font-bold h-[4vh] justify-center items-center text-center">
     <ChevronLeftIcon class="w-[5vw]" />
-    <span>Prev</span>
+    <span>뒤로</span>
   </button>
 </template>
 
