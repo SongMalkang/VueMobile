@@ -1,6 +1,8 @@
 <template>
   <div class="text-black h-[100vh]">
-    <AppHeader />
+    <AppHeader>
+        가스 감지기 상태 확인
+    </AppHeader>
     <div class="w-[90vw] justify-between flex flex-row mt-[2vh] ml-[5vw]">
       <HalfSelectBox>
         <option value="A" selected>전체 도크</option>

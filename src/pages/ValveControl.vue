@@ -1,6 +1,8 @@
 <template>
   <div class="h-[100vh]">
-    <AppHeader />
+    <AppHeader>
+      <span>밸브 원격 제어</span>
+    </AppHeader>
     <div class="Container">
       <div class="flex flex-row relative mt-[3vh] justify-center">
         <HalfSelectBox class="px-4 mr-[2vw]">

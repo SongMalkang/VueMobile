@@ -1,6 +1,8 @@
 <template lang="">
   <div>
-    <AppHeader />
+    <AppHeader>
+      <slot>상세 조회</slot>
+    </AppHeader>
     <div class="flex flex-col h-[95vh]">
       <PrevButtons class="flex ml-[3vw] my-[1.5vh]" @click="goBack"/>
       <HalfSelectBox class="ml-[3vw] mb-[2vh]">

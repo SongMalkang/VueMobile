@@ -34,9 +34,9 @@ export default {
         { id : 'S4', title : 'ㄴ 가스 감지기 상태 확인', routeUrl : '/gas/status' },
 
         { id : 'M2', title : '매니폴드 밸브 원격 모니터링', routeUrl : '/' },
-        { id : 'S5', title : 'ㄴ 실시간 밸브 장치 상태 조회', routeUrl : '/valve/monitoring' },
-        { id : 'S6', title : 'ㄴ 밸브 제어 이력 조회', routeUrl : '/valve/history' },
-        { id : 'S7', title : 'ㄴ 밸브 원격 제어', routeUrl : '/valve/control' },
+        { id : 'S5', title : 'ㄴ 장치 상태 조회 & 제어', routeUrl : '/valve/monitoring' },
+        { id : 'S6', title : 'ㄴ 제어 이력 조회', routeUrl : '/valve/history' },
+        // { id : 'S7', title : 'ㄴ 밸브 원격 제어', routeUrl : '/valve/control' },
       ],
     };
   },

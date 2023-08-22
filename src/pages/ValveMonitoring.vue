@@ -1,6 +1,8 @@
 <template>
   <div>
-    <AppHeader />
+    <AppHeader>
+      <span>매니폴드 밸브 실시간 조회</span>
+    </AppHeader>
     <div class="bg-white w-[100vw] mt-[2vh] rounded-lg h-[93vh] flex flex-col justify-between align-middle text-center overflow-hidden">
 
       <div class="overflow-scrollw-[100vw] h-[75vh] px-[2vw] flex flex-col justify-between align-middle text-center">
@@ -17,14 +19,14 @@
             <option>H도크</option>
           </HalfSelectBox>
 
-          <button class="w-[44vw] h-[5vh] mx-[1vw] rounded-xl bg-sky-600 text-white font-bold" @click="goToDetail">
-            상세보기
+          <button class="w-[44vw] h-[5vh] mx-[1vw] text-[7vw] rounded-xl bg-red-600 text-white font-bold" @click="goToDetail">
+            밸브 제어
           </button>
         </div>
 
         <div class="w-[96vw] h-[40vh] rounded-xl bg-slate-100 overflow-hidden">
 
-          <div class="h-[5vh] text-xl font-bold bg-sky-600 justify-center align-middle text-center flex flex-row">
+          <div class="h-[5vh] text-[6vw] font-bold bg-sky-600 justify-center align-middle text-center flex flex-row">
             <span class="flex items-center text-white">매니폴드 밸브 현황</span>
           </div>
 
@@ -95,7 +97,7 @@
 
         <div class="w-[96vw] h-[22vh] rounded-xl bg-slate-100 overflow-hidden">
           <!-- 제어 장치 합계 -->
-          <div class="h-[5vh] text-xl font-bold bg-sky-600 justify-center align-middle text-center flex flex-row">
+          <div class="h-[5vh] text-[6vw] font-bold bg-sky-600 justify-center align-middle text-center flex flex-row">
             <span class="flex items-center text-white" @click="recentValveLog">제어 장치 현황</span>
           </div>
 
@@ -158,7 +160,7 @@ export default {
   },
   methods: {
     goToDetail() {
-      this.$router.push('/valve/detail');
+      this.$router.push('/valve/control');
     },
     async recentValveLog() {
       // if(this.currentPath !== '/valve/monitoring'){

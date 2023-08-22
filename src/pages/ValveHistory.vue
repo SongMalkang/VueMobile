@@ -1,6 +1,8 @@
 <template>
   <div class="h-[100vh] bg-white text-black">
-    <AppHeader />
+    <AppHeader>
+      <slot>밸브 제어 이력 조회</slot>
+    </AppHeader>
     <div class="flex flex-row relative mt-[3vh] ml-[6vw]">
       <HalfSelectBox class="px-4 mr-[1.5vw]">
         <option>전체 도크</option>

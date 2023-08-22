@@ -1,6 +1,8 @@
 <template>
   <div class="">
-    <AppHeader />
+    <AppHeader>
+      <span>가스 감지기 현황 조회</span>
+    </AppHeader>
     <div class="Container h-[95vh] w-screen justify-center">
       <div class="InteractTable flex flex-row justify-center">
         <HalfSelectBox v-model="selectedOption" @change="updateValue">

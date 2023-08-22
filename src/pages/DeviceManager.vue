@@ -1,6 +1,8 @@
 <template>
   <div class="justify-center">
-    <AppHeader />
+    <AppHeader>
+      가스 감지기 설치 & 철거
+    </AppHeader>
     <div class="Container">
       <div class="flex flex-row relative mt-[2vh]">
         <HalfSelectBox class="px-4 mr-[1.5vw]">

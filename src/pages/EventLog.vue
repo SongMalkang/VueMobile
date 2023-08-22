@@ -1,6 +1,8 @@
 <template>
   <div>
-    <AppHeader />
+    <AppHeader>
+      <span>가스 알람 및 이력 조회</span>
+    </AppHeader>
     <div class="Container">
       <PrevButtons class="absolute left-2 top-14" @click="goBack"/>
       <div class="flex flex-row mt-14 bg-sky-600 text-white w-[96vw] h-[4vh] text-lg font-bold justify-center items-center text-center rounded-xl">알람 내용</div>

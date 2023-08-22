@@ -1,6 +1,8 @@
 <template>
   <div>
-    <AppHeader />
+    <AppHeader>
+      <span>가스 현황 상세보기</span>
+    </AppHeader>
     <div class="Container">
       <PrevButtons class="relative -left-[34vw] top-[1.5vh]" @Click="goToGasmonitoring" />
       <div class="flex flex-row relative mt-[3vh]">

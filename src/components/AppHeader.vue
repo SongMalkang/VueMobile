@@ -1,7 +1,7 @@
 <template>
-  <div id="appHeader" class="header bg-sky-600 w-screen h-[5vh] text-center items-center text-white font-bold px-2">
+  <div id="appHeader" class="header bg-sky-600 w-screen h-[5vh] text-center items-center text-white text-[5.5vw] font-bold px-2">
     <Bars3Icon class="menu-icon text-sky-900 w-7 overflow-hidden rounded-lg" @click="showSidebar = !showSidebar" />
-    <span class="text-lg">실시간 가스 현황 조회</span>
+    <slot></slot>
     <HomeIcon class="text-sky-900 w-7 overflow-hidden rounded-lg" @click="goToHome">Home</HomeIcon>
   </div>
   <SideBarNavigate v-show="showSidebar" class="fixed z-50"></SideBarNavigate>
