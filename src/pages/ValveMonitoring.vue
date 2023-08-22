@@ -7,17 +7,18 @@
 
       <div class="overflow-scrollw-[100vw] h-[75vh] px-[2vw] flex flex-col justify-between align-middle text-center">
         <div class="w-[96vw] h-[5vh] rounded-xl flex flex-row justify-between">
-          <HalfSelectBox class="px-4 mr-[2vw]">
-            <option>도크 구분</option>
-            <option>1도크</option>
-            <option>2도크</option>
-            <option>3도크</option>
-            <option>4도크</option>
-            <option>5도크</option>
-            <option>8도크</option>
-            <option>9도크</option>
-            <option>H도크</option>
-          </HalfSelectBox>
+          
+          <select class="px-4 w-[40vw] rounded-xl" v-model="selectedDock">
+            <option value="all">도크 구분</option>
+            <option value="1D">1도크</option>
+            <option value="2D">2도크</option>
+            <option value="3D">3도크</option>
+            <option value="4D">4도크</option>
+            <option value="5D">5도크</option>
+            <option value="8D">8도크</option>
+            <option value="9D">9도크</option>
+            <option value="HD">H도크</option>
+          </select>
 
           <button class="w-[44vw] h-[5vh] mx-[1vw] text-[7vw] rounded-xl bg-red-600 text-white font-bold" @click="controlPopup=true">
             밸브 제어
@@ -48,13 +49,13 @@
                   </thead>
                   <tbody class="flex flex-row h-[3vh] justify-between">
                     <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
-                      {{ totalCounts.oxygenOpened + totalCounts.oxygenClosed }}
+                      {{ filteredCounts.oxygenOpened + filteredCounts.oxygenClosed }}
                     </td>
                     <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
-                      {{ totalCounts.oxygenOpened }}
+                      {{ filteredCounts.oxygenOpened }}
                     </td>
                     <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
-                      {{ totalCounts.oxygenClosed }}
+                      {{ filteredCounts.oxygenClosed }}
                     </td>
                   </tbody>
                 </table>
@@ -77,13 +78,13 @@
                   </thead>
                   <tbody class="flex flex-row h-[3vh] justify-between">
                     <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
-                      {{ totalCounts.ethyleneOpened + totalCounts.ethyleneClosed }}
+                      {{ filteredCounts.ethyleneOpened + filteredCounts.ethyleneClosed }}
                     </td>
                     <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
-                      {{ totalCounts.ethyleneOpened }}
+                      {{ filteredCounts.ethyleneOpened }}
                     </td>
                     <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
-                      {{ totalCounts.ethyleneClosed }}
+                      {{ filteredCounts.ethyleneClosed }}
                     </td>
                   </tbody>
                 </table>
@@ -117,13 +118,13 @@
                   </thead>
                   <tbody class="flex flex-row h-[3vh] justify-between">
                     <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
-                      {{ totalCounts.ethyleneOpened + totalCounts.ethyleneClosed }}
+                      {{ filteredCounts.ethyleneOpened + filteredCounts.ethyleneClosed }}
                     </td>
                     <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
-                      {{ totalCounts.ethyleneOpened + totalCounts.ethyleneClosed - totalCounts.valveStatusZero }}
+                      {{ filteredCounts.ethyleneOpened + filteredCounts.ethyleneClosed - filteredCounts.valveStatusZero }}
                     </td>
                     <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
-                      {{ totalCounts.valveStatusZero }}
+                      {{ filteredCounts.valveStatusZero }}
                     </td>
                   </tbody>
                 </table>
@@ -172,7 +173,8 @@ export default {
       },
       interval: null,
       currentPath: '/valve/monitoring',
-      controlPopup: false
+      controlPopup: false,
+      selectedDock: 'all'
     };
   },
   methods: {
@@ -189,7 +191,7 @@ export default {
         const res = await axios.get("/api/valve/log/recent");
         const result = res.data;
 
-        const docks = ['D1', 'D2', 'D3', 'D4', 'D5', 'D8', 'D9', 'DH'];
+        const docks = ['1D', '2D', '3D', '4D', '5D', '8D', '9D', 'HD'];
 
         docks.forEach(dock => {
           this.dockCounts.set(dock, {
@@ -253,6 +255,22 @@ export default {
     }, 5000);
     this.currentPath = this.$route.path;
   },
+  computed: {
+    filteredCounts() {
+      if (this.selectedDock === 'all') {
+        return this.totalCounts;
+      } else {
+        return this.dockCounts.get(this.selectedDock) || {
+          oxygenOpened: 0,
+          oxygenClosed: 0,
+          ethyleneOpened: 0,
+          ethyleneClosed: 0,
+          valveStatusZero: 0
+        };
+      }
+    }
+  }
+
   // beforeDestroy() {
   //   console.log('Valve Page Destroyed Success')
   //   clearInterval(this.interval);
