@@ -38,20 +38,20 @@
               </div>
               <div class="w-[65vw] mt-[0.5vh] h-[13vh] py-[1vh]">
                 <!-- 테이블영역 -->
-                <table class="table table-auto mt-[1.7vh] text-black">
-                  <thead class="flex flex-row h-[3vh] justify-between">
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">전체</td>
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">열림</td>
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">닫힘</td>
+                <table class="table table-auto text-black">
+                  <thead class="flex flex-row h-[5h] justify-between">
+                    <td class="w-[22vw] h-[5vh] font-bold border-x-2 text-[6vw]">전체</td>
+                    <td class="w-[22vw] h-[5vh] font-bold border-x-2 text-[6vw]">열림</td>
+                    <td class="w-[22vw] h-[5vh] font-bold border-x-2 text-[6vw]">닫힘</td>
                   </thead>
                   <tbody class="flex flex-row h-[3vh] justify-between">
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
                       {{ totalCounts.oxygenOpened + totalCounts.oxygenClosed }}
                     </td>
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
                       {{ totalCounts.oxygenOpened }}
                     </td>
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
                       {{ totalCounts.oxygenClosed }}
                     </td>
                   </tbody>
@@ -67,20 +67,20 @@
               </div>
               <div class="w-[65vw] mt-[0.5vh] h-[13vh] py-[1vh]">
                 <!-- 테이블영역 -->
-                <table class="table table-auto mt-[1.7vh] text-black">
-                  <thead class="flex flex-row h-[3vh] justify-between">
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">전체</td>
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">열림</td>
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">닫힘</td>
+                <table class="table table-auto text-black">
+                  <thead class="flex flex-row h-[5vh] justify-between">
+                    <td class="w-[22vw] h-[5vh] font-bold border-x-2 text-[6vw]">전체</td>
+                    <td class="w-[22vw] h-[5vh] font-bold border-x-2 text-[6vw]">열림</td>
+                    <td class="w-[22vw] h-[5vh] font-bold border-x-2 text-[6vw]">닫힘</td>
                   </thead>
                   <tbody class="flex flex-row h-[3vh] justify-between">
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
                       {{ totalCounts.ethyleneOpened + totalCounts.ethyleneClosed }}
                     </td>
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
                       {{ totalCounts.ethyleneOpened }}
                     </td>
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
                       {{ totalCounts.ethyleneClosed }}
                     </td>
                   </tbody>
@@ -107,20 +107,20 @@
               </div>
               <div class="w-[65vw] mt-[0.5vh] h-[13vh] py-[1vh]">
                 <!-- 테이블영역 -->
-                <table class="table table-auto mt-[1.7vh] text-black">
-                  <thead class="flex flex-row h-[3vh] justify-between">
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">전체</td>
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">정상</td>
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-lg">점검</td>
+                <table class="table table-auto text-black">
+                  <thead class="flex flex-row h-[5vh] justify-between">
+                    <td class="w-[22vw] h-[5vh] font-bold border-x-2 text-[6vw]">전체</td>
+                    <td class="w-[22vw] h-[5vh] font-bold border-x-2 text-[6vw]">정상</td>
+                    <td class="w-[22vw] h-[5vh] font-bold border-x-2 text-[6vw]">점검</td>
                   </thead>
                   <tbody class="flex flex-row h-[3vh] justify-between">
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
                       {{ totalCounts.ethyleneOpened + totalCounts.ethyleneClosed }}
                     </td>
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
                       {{ totalCounts.ethyleneOpened + totalCounts.ethyleneClosed - totalCounts.valveStatusZero }}
                     </td>
-                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-2xl">
+                    <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
                       {{ totalCounts.valveStatusZero }}
                     </td>
                   </tbody>

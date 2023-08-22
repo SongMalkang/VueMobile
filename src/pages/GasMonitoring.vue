@@ -69,6 +69,8 @@ import axios from 'axios'
         const res = await axios.get("/api/gas/log/recent")
         const result = res.data
 
+        console.log(result)
+
         let filterCondition;
 
         if (this.dockFilter === 'A') {

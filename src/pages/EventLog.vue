@@ -50,7 +50,7 @@
       </table>
 
       <div class="">
-        <div class="flex flex-row justify-items-center bg-sky-600 text-white w-[96vw] h-[4vh] text-lg font-bold justify-center text-center rounded-xl">조치 내용</div>
+        <div class="flex flex-row justify-items-center bg-sky-600 text-white w-[96vw] h-[4vh] text-lg font-bold justify-center items-center text-center rounded-xl">조치 내용</div>
         <table class="w-[96vw] mt-2 bg-sky-600 border-[1px] border-zinc-400">
           <thead>
             <th class="py-2">구분</th>

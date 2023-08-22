@@ -61,10 +61,10 @@
               <span class="mt-[1.5vh] text-[2.2vh]">{{ selectedDevice.location }}</span>
             </div>
 
-            <div class="flex flex-col text-sky-800 mt-6 text-left px-4 font-bold text-[3vw]">장치이름 : {{ selectedDevice.device_no }}</div>
-            <div class="flex flex-col text-sky-800 mt-0 text-left px-4 font-bold text-[3vw]">도크번호 : {{ selectedDevice.dock_no }} Dock</div>
-            <div class="flex flex-col text-sky-800 mt-0 text-left px-4 font-bold text-[3vw]">호선번호 : {{ selectedDevice.ship_no }}</div>
-            <div class="flex flex-col text-sky-800 mt-0 text-left px-4 font-bold text-[3vw]">최종수신시각 : 2023-07-27 17:07:01</div>
+            <div class="flex flex-col text-sky-800 mt-6 text-left px-4 font-bold text-[3.3vw]">장치이름 : {{ selectedDevice.device_no }}</div>
+            <div class="flex flex-col text-sky-800 mt-0 text-left px-4 font-bold text-[3.3vw]">도크번호 : {{ selectedDevice.dock_no }} Dock</div>
+            <div class="flex flex-col text-sky-800 mt-0 text-left px-4 font-bold text-[3.3vw]">호선번호 : {{ selectedDevice.ship_no }}</div>
+            <div class="flex flex-col text-sky-800 mt-0 text-left px-4 font-bold text-[3.3vw]">최종수신시각 : 2023-07-27 17:07:01</div>
           </div>
             
           <div class="flex flex-col mt-[10vh] font-bold color-black">

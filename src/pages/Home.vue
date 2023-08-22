@@ -9,7 +9,7 @@
     <button
       v-for="item in menuList"
       :key="item.id"
-      :class="[ 'py-2 bg-sky-600 text-sm font-bold w-[60vw]', item.id === 'M1' || item.id === 'M2' ? 'box' : 'buttons' ]"
+      :class="[ 'py-2 bg-sky-600 text-[4vw] font-bold w-[60vw]', item.id === 'M1' || item.id === 'M2' ? 'box' : 'buttons' ]"
       :disabled="item.id === 'M1' || item.id === 'M2'"
       @click="goToRoute(item.routeUrl)"
     >
@@ -91,7 +91,7 @@ export default {
 
   border-radius: 10px;
 
-  font-size: 5vw;
+  font-size: 6vw;
   
   text-align: center;
   justify-content: center;
@@ -110,7 +110,7 @@ export default {
   color: black;
   background-color: #d5d5d5;
 
-  font-size: 4vw;
+  font-size: 5vw;
 
   align-items: center;
   vertical-align: center;
