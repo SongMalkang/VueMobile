@@ -116,7 +116,6 @@
                     <td class="w-[22vw] h-[5vh] font-bold border-x-2 text-[6vw]">정상</td>
                     <td class="w-[22vw] h-[5vh] font-bold border-x-2 text-[6vw]">점검</td>
                   </thead>
-                  <td class="flex flex-row w-[22vw] h-[10vw]"> 외업관리시스템</td>
                   <tbody class="flex flex-row h-[3vh] justify-between">
                     <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
                       {{ filteredCounts.ethyleneOpened + filteredCounts.ethyleneClosed }}
