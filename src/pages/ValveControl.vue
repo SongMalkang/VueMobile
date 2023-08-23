@@ -22,6 +22,16 @@
       </div>
     </div>
 
+    <div v-if="vvControlWindow" class="absolute w-[100vw] h-[60vh] top-[20vh] border-y-4 border-sky-800 bg-sky-600 text-white font-bold">
+      <div class="flex flex-row px-[5vw] py-[1vh] justify-between w-[100vw]">
+        <span class="text-[4.5vw]">밸브 제어 창</span>
+        <span @click="vvControlWindow=false">X</span>
+      </div>
+      <div class="flex flex-col bg-zinc-50 w-[100vw] h-[50vh] text-[6vw] font-bold text-black">
+        <span>8D - E27 - N0001</span>
+      </div>
+    </div>
+
     <div class="overflow-y-scroll h-[85vh] overflow-x-hidden">
       <table class="table table-auto mx-[4vw] w-[92vw] bg-black">
         <thead>
@@ -39,14 +49,14 @@
             <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
             <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>
             <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">닫힘</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-200 font-bold">클릭</td>
+            <td @click="vvControlWindow=true" class="py-[1vh] border-[1px] bg-zinc-200 font-bold">클릭</td>
           </tr>
           <tr class="">
-            <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">닫힘</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">클릭</td>
+            <td class="py-[1vh] border-[1px] bg-zinc-400">N0001</td>
+            <td class="py-[1vh] border-[1px] bg-zinc-400">8도크 - E37<br />23.08.22 14:00</td>
+            <td class="py-[1vh] border-[1px] bg-zinc-400 font-bold">열림</td>
+            <td class="py-[1vh] border-[1px] bg-zinc-400 font-bold">닫힘</td>
+            <td class="py-[1vh] border-[1px] bg-zinc-400 font-bold">-</td>
           </tr>
           <tr class="">
             <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
@@ -148,6 +158,7 @@ import ValveStatusCard from '../components/ValveStatusCard.vue';
     components: { AppHeader, HalfSelectBox, ValveStatusCard, PrevButtons },
     data() {
       return {
+        vvControlWindow: false,
 
       }
     },

@@ -16,8 +16,8 @@
       </div>
 
       <div class="ml-4 flex flex-col w-[30vw] text-left px-4 font-bold text-lg align-middle justify-center">
-        <span class="py-2 text-zinc-600 text-[2vh]">흡입식: {{ calPump }}</span>
-        <span class="py-2 text-zinc-600 text-[2vh]">확산식: {{ calAir }}</span>
+        <span class="py-2 text-zinc-600 text-[4.8vw] text-ellipsis flex-nowrap flex">흡입식: {{ calPump }}</span>
+        <span class="py-2 text-zinc-600 text-[4.8vw] text-ellipsis flex-nowrap flex">확산식: {{ calAir }}</span>
       </div>
       
     </div>

@@ -9,7 +9,7 @@
         <div class="w-[96vw] h-[5vh] rounded-xl flex flex-row justify-between">
           
           <select class="px-4 w-[40vw] rounded-xl" v-model="selectedDock">
-            <option value="all">도크 구분</option>
+            <option value="all">도크 구분(전체)</option>
             <option value="1D">1도크</option>
             <option value="2D">2도크</option>
             <option value="3D">3도크</option>
@@ -116,6 +116,7 @@
                     <td class="w-[22vw] h-[5vh] font-bold border-x-2 text-[6vw]">정상</td>
                     <td class="w-[22vw] h-[5vh] font-bold border-x-2 text-[6vw]">점검</td>
                   </thead>
+                  <td class="flex flex-row w-[22vw] h-[10vw]"> 외업관리시스템</td>
                   <tbody class="flex flex-row h-[3vh] justify-between">
                     <td class="w-[22vw] h-[3.5vh] font-bold border-x-2 text-[7vw]">
                       {{ filteredCounts.ethyleneOpened + filteredCounts.ethyleneClosed }}
@@ -140,12 +141,18 @@
           <span class="text-[5vw] text-white font-bold">사용자 이름 : 허재석</span>
           <br />
 
-          <div class="text-white font-bold text-[5vw]">
+          <!-- 제어 권한 확인하여 v-if 수정 -->
+          <div v-if="true" class="text-white font-bold text-[5vw]">
             밸브 제어가 가능한 작업자입니다. <br /> 제어 페이지로 이동하시겠습니까?
           </div>
           <div class="flex flex-row w-full justify-between text-white font-bold py-[3vh]">
             <button @click="goToDetail" class="py-[1vh] w-[30vw] font-bold text-[5vw] bg-green-600 border-2">확인</button>
             <button @click="this.controlPopup=false" class="py-[1vh] w-[30vw] font-bold text-[5vw] bg-orange-600 border-2">취소</button>
+          </div>
+
+          <!-- 제어 권한 확인하여 v-if 수정 -->
+          <div v-if="false">
+            <span class="text-[5vw] font-bold text-white">제어 권한이 없습니다. <br /><br /> 관리자에게 문의 바랍니다.</span>
           </div>
 
         </div>
@@ -190,6 +197,8 @@ export default {
       try {
         const res = await axios.get("/api/valve/log/recent");
         const result = res.data;
+
+        console.log(result)
 
         const docks = ['1D', '2D', '3D', '4D', '5D', '8D', '9D', 'HD'];
 
