@@ -55,7 +55,7 @@
       </table>
       
       <!-- 팝업창 -->
-      <div v-if="setPopupOn" class="absolute w-[90vw] h-[75vh] bg-slate-100 bottom-0 rounded-2xl overflow-hidden text-white">
+      <div v-if="setPopupOn" class="absolute w-[90vw] h-[85vh] bg-slate-100 bottom-0 rounded-2xl overflow-hidden text-white">
 
         <div class="flex flex-col w-[90vw] bg-sky-800 h-[6vh]">
             <div class="flex flex-row font-bold justify-between px-8 text-[6vw] items-center" @click="setPopupOn=false">
@@ -116,14 +116,11 @@
 
           </table>
 
-
-          <!-- <span class="flex text-ellipsis flex-nowrap px-2 py-2">위치: E/R M/E L.O.WUMP TK No.2 LFO SVT</span>
-          <span class="flex text-ellipsis flex-nowrap px-2 py-2">시각: 23.08.23 09:16:38</span> -->
         </div>
 
-        <div class="flex flex-col font-bold color-black mt-[20vh] bg-slate-100">
-          <ApexCharts class="w-full" height=250 type="line" :options="options" :series="options.series" />
-        </div>
+        <div class="flex flex-col items-center align-middle font-bold color-black mt-[20vh] bg-slate-100">
+          <ApexCharts class="w-full items-center align-middle ml-[10vw]" height=280 type="line" :options="options" :series="options.series" />
+        </div>  
 
       </div>
 
@@ -160,17 +157,25 @@ import ApexCharts from "vue3-apexcharts";
         selectedDevice: {},
         options : {
             series: [{
-            name: 'Income',
-            type: 'column',
+            name: 'O2',
+            type: 'line',
             data: [20.9, 20.9, 20.9, 20.9, 20.9, 20.9, 20.9, 20.9]
           }, {
-            name: 'Cashflow',
-            type: 'column',
+            name: 'CO2',
+            type: 'line',
             data: [1.1, 3, 3.1, 4, 4.1, 4.9, 6.5, 8.5]
           }, {
-            name: 'Revenue',
-            type: 'line',
-            data: [20, 29, 37, 36, 44, 45, 50, 58]
+            name: 'CO',
+            type: 'column',
+            data: [0, 0, 0, 0, 0, 0, 0, 0]
+          }, {
+            name: 'H2S',
+            type: 'column',
+            data: [0, 0, 2, 3, 4, 3, 1, 0]
+          }, {
+            name: 'CH4',
+            type: 'column',
+            data: [3, 2.5, 2, 1.2, 2, 1, 0, 0]
           }],
             chart: {
             height: 350,
@@ -187,23 +192,25 @@ import ApexCharts from "vue3-apexcharts";
             width: [1, 1, 4]
           },
           title: {
-            text: '실시간 가스 그래프',
+            // text: '실시간 가스 그래프',
             align: 'left',
             offsetX: 110
           },
           xaxis: {
-            categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016],
+            categories: ['09:09', '09:10', '09:11', '09:12', '09:13', '09:14', '09:15', '09:16'],
           },
           yaxis: [
             {
-              axisTicks: {
-                show: true,
-              },
+              // axisTicks: {
+              //   show: true,
+              // },
+              seriesName: 'O2',
               axisBorder: {
                 show: true,
                 color: '#008FFB'
               },
               labels: {
+                show: false,
                 style: {
                   colors: '#008FFB',
                 }
@@ -222,7 +229,7 @@ import ApexCharts from "vue3-apexcharts";
               tickAmount: 4,
             },
             {
-              seriesName: 'Income',
+              seriesName: 'CO2',
               opposite: true,
               axisTicks: {
                 show: true,
@@ -232,19 +239,23 @@ import ApexCharts from "vue3-apexcharts";
                 color: '#00D285'
               },
               labels: {
+                show: false,
                 style: {
                   colors: '#00E396',
                 }
               },
               title: {
-                text: "가스 농도(%)",
+                // text: "가스 농도(%)",
                 style: {
                   color: '#00E396',
                 }
               },
+              min: 0,
+              max: 10,
+              tickAmount: 4,
             },
             {
-              seriesName: 'Revenue',
+              seriesName: 'CO',
               opposite: true,
               axisTicks: {
                 show: true,
@@ -254,16 +265,74 @@ import ApexCharts from "vue3-apexcharts";
                 color: '#FEB019'
               },
               labels: {
+                show: false,
                 style: {
                   colors: '#FEB019',
                 },
               },
               title: {
-                text: "가스 농도(PPM)",
+                // text: "가스 농도(PPM)",
                 style: {
                   color: '#FEB019',
                 }
-              }
+              },
+              min: 0,
+              max: 10,
+              tickAmount: 4,
+            },
+            
+            {
+              seriesName: 'H2S',
+              opposite: true,
+              axisTicks: {
+                show: true,
+              },
+              axisBorder: {
+                show: true,
+                color: '#FEB019'
+              },
+              labels: {
+                show: false,
+                style: {
+                  colors: '#FEB019',
+                },
+              },
+              title: {
+                // text: "가스 농도(PPM)",
+                style: {
+                  color: '#FEB019',
+                }
+              },
+              min: 0,
+              max: 10,
+              tickAmount: 4,
+            },
+            
+            {
+              seriesName: 'CH4',
+              opposite: true,
+              axisTicks: {
+                show: true,
+              },
+              axisBorder: {
+                show: true,
+                color: '#FEB019'
+              },
+              labels: {
+                show: false,
+                style: {
+                  colors: '#FEB019',
+                },
+              },
+              title: {
+                // text: "가스 농도(PPM)",
+                style: {
+                  color: '#FEB019',
+                }
+              },
+              min: 0,
+              max: 10,
+              tickAmount: 4,
             },
           ],
           tooltip: {
