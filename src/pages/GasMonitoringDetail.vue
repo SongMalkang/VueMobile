@@ -49,7 +49,7 @@
                 <tr 
                   class="border-b-2 border-r-2 border-l-2 border-slate-900 text-[2vw]" 
                   :class="dock.device_no === 'E0001' ? 'text-yellow-500 font-bold' : 'text-black'"
-                  @click="selectedDevice = dock, setPopupOn=true, getThisData(dock.device_no)"
+                  @click="selectedDevice = dock, setPopupOn=true, getThisData(selectedDevice.device_no)"
                 >
                   <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.dq_no }}</td>
                   <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.ship_no }}</td>
@@ -93,11 +93,11 @@
 
             <tbody>
               <tr v-if="thisDeviceData">
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0].O2 }}<sub>%</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0].CO2 }}<sub>%</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0].CO }}<sub>ppm</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0].H2S }}<sub>ppm</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0].CH4 }}<sub>%</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0]?.O2 }}<sub>%</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0]?.CO2 }}<sub>%</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0]?.CO }}<sub>ppm</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0]?.H2S }}<sub>ppm</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0]?.CH4 }}<sub>%</sub></td>
               </tr>
 
               <tr>
@@ -131,7 +131,7 @@
 
         </div>
 
-        <div class="flex flex-col items-center align-middle font-bold color-black mt-[20vh] bg-slate-100">
+        <div v-if="this.selectedDevice" class="flex flex-col items-center align-middle font-bold color-black mt-[20vh] bg-slate-100">
           <ApexCharts class="w-full items-center align-middle ml-[10vw]" height=280 type="line" :options="options" :series="options.series" />
         </div>  
 
@@ -157,6 +157,12 @@ import axios from 'axios';
         this.$router.push('/gas/monitoring');
       },
       async getThisData(targetDevice) {
+
+        if(!targetDevice) {
+          console.log('noTargetDevice')
+          return;
+        }
+
         try {
           const res = await axios.get(`/api/gas/log/this?targetDevice=${targetDevice}`);
           const result = res.data;
@@ -167,7 +173,39 @@ import axios from 'axios';
         catch (error) {
           console.error(error);
         }
+      },
+      parseData(type) {
+        console.log(this.selectedDevice)
+        if(!this.selectedDevice) {
+          return [0, 0, 0, 0, 0]
+        }else if(type='O2') {
+          return [this.selectedDevice[4].O2, this.selectedDevice[3].O2, this.selectedDevice[2].O2, this.selectedDevice[1].O2, this.selectedDevice[0].O2] ;
+        }
+        else if(type='CO2') {
+          return [this.selectedDevice[4].CO2, this.selectedDevice[3].CO2, this.selectedDevice[2].CO2, this.selectedDevice[1].CO2, this.selectedDevice[0].CO2] ;
+        }
+        else if(type='CO') {
+          return [this.selectedDevice[4].CO, this.selectedDevice[3].CO, this.selectedDevice[2].CO, this.selectedDevice[1].CO, this.selectedDevice[0].CO] ;
+        }
+        else if(type='H2S') {
+          return [this.selectedDevice[4].H2S, this.selectedDevice[3].H2S, this.selectedDevice[2].H2S, this.selectedDevice[1].H2S, this.selectedDevice[0].H2S] ;
+        }
+        else if(type='CH4') {
+          return [this.selectedDevice[4].CH4, this.selectedDevice[3].CH4, this.selectedDevice[2].CH4, this.selectedDevice[1].CH4, this.selectedDevice[0].CH4] ;
+        }
+        else if(type='time') {
+          return [this.selectedDevice[4].CHK_TIME, this.selectedDevice[3].CHK_TIME, this.selectedDevice[2].CHK_TIME, this.selectedDevice[1].CHK_TIME, this.selectedDevice[0].CHK_TIME] ;
+        }
       }
+    },
+    mounted() {
+
+      this.interval = setInterval(() => {
+        this.getThisData(this.selectedDevice.device_no)
+      }, 5000);
+
+      this.currentPath = this.$route.path;
+      
     },
     data () {
       return {
@@ -179,6 +217,7 @@ import axios from 'axios';
           { time: '23.06.20 13:51', device_no: 'F0010', dq_no: '8D', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
           { time: '23.06.20 13:51', device_no: 'E0006', dq_no: '8D', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
         ],
+        interval: null,
         thisDeviceData: [],
         setPopupOn: false, // 클릭했을때 최신 로그로 그래프 만들기
         selectedDevice: {},
@@ -186,23 +225,23 @@ import axios from 'axios';
             series: [{
             name: 'O2',
             type: 'column',
-            data: [20.9]
+            data: this.parseData('O2')
           }, {
             name: 'CO2',
             type: 'column',
-            data: [1]
+            data: this.parseData('CO2')
           }, {
             name: 'CO',
             type: 'line',
-            data: [0]
+            data: this.parseData('CO')
           }, {
             name: 'H2S',
             type: 'line',
-            data: [0]
+            data: this.parseData('H2S')
           }, {
             name: 'CH4',
             type: 'line',
-            data: [0]
+            data: this.parseData('CH4')
           }],
             chart: {
             height: 350,
@@ -224,7 +263,7 @@ import axios from 'axios';
             offsetX: 110
           },
           xaxis: {
-            categories: ['09:09', '09:10', '09:11', '09:12', '09:13', '09:14', '09:15', '09:16'],
+            categories: this.parseData('time'),
           },
           yaxis: [
             {
