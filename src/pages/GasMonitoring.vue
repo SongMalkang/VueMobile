@@ -23,9 +23,9 @@
       </div>
 
       <div class="StatusContainer">
-        <GasStatusCard title="정상" :total="normalSenseF + normalSenseE" :calAir="normalSenseF" :cal-pump="normalSenseE" themeColor="text-green-600"/>
-        <GasStatusCard title="경고" :total="warnSenseF + warnSenseE" :calAir="warnSenseF" :cal-pump="warnSenseE" themeColor="text-yellow-600"/>
-        <GasStatusCard title="위험" :total="dangerSenseF + dangerSenseE" :calAir="dangerSenseF" :cal-pump="dangerSenseE" themeColor="text-red-600"/>
+        <GasStatusCard title="정상" :total="normalSenseF + normalSenseE" :calAir="normalSenseE" :cal-pump="normalSenseF" themeColor="text-green-600"/>
+        <GasStatusCard title="경고" :total="warnSenseF + warnSenseE" :calAir="warnSenseE" :cal-pump="warnSenseF" themeColor="text-yellow-600"/>
+        <GasStatusCard title="위험" :total="dangerSenseF + dangerSenseE" :calAir="dangerSenseE" :cal-pump="dangerSenseF" themeColor="text-red-600"/>
       </div>
     </div>
   </div>

@@ -100,7 +100,7 @@ app.get('/gas/log/recent', async (req, res) => {
   }
 });
 
-app.get('/gas/log/recent', async (req, res) => {
+app.get('/gas/log/this', async (req, res) => {
   let connection;
 
   try {
@@ -110,41 +110,19 @@ app.get('/gas/log/recent', async (req, res) => {
 
     const result = await connection.execute(
       `
-      SELECT
-        t.CMPNY_DIV,
-        t.SENS_KIND,
-        t.SENS_NO,
-        t.CHK_TIME,
-        t.SHIP_NO,
-        t.MNGR_AREA,
-        t.INST_LPOS,
-        t.INST_MPOS,
-        t.INST_DPOS,
-        t.O2,
-        t.H2S,
-        t.CH4,
-        t.CO,
-        t.CO2,
-        t.O2_ALARM_CD,
-        t.H2S_ALARM_CD,
-        t.CH4_ALARM_CD,
-        t.CO_ALARM_CD,
-        t.CO2_ALARM_CD,
-        t.ALARM_CD,
-        xx.dq_loc
-      FROM 
-        TMD2000C01 t, 
-        (SELECT SENS_NO, MAX(CHK_TIME) AS max_CHK_TIME FROM TMD2000C01  GROUP BY SENS_NO ) sub, 
-        tma1040c01 xx
-      WHERE t.SENS_NO = sub.SENS_NO AND t.CHK_TIME = sub.max_CHK_TIME
-      AND   t.ship_no = xx.ship(+)
-        `
-    ); // 개발 완료시점에, 미수신 관련 로직을 추가 할 것
+      SELECT *
+        FROM tmd2000c01
+        WHERE (SENS_KIND || SENS_NO) = :targetDevice
+        ORDER BY chk_time DESC
+        FETCH FIRST 5 ROWS ONLY
+      `, 
+      { targetDevice: req.query.targetDevice } // Bind variable
+    );
 
     const formattedData = formatResult(result);
     res.status(200).json(formattedData);
-
-  } catch (error) {
+  }
+  catch (error) {
     console.log(error);
     res.status(500).send('Internal server error');
   } finally {
@@ -157,6 +135,7 @@ app.get('/gas/log/recent', async (req, res) => {
     }
   }
 });
+
 
 app.get('/valve/log/recent', async (req, res) => {
   let connection;

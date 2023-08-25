@@ -49,7 +49,7 @@
                 <tr 
                   class="border-b-2 border-r-2 border-l-2 border-slate-900 text-[2vw]" 
                   :class="dock.device_no === 'E0001' ? 'text-yellow-500 font-bold' : 'text-black'"
-                  @click="selectedDevice = dock, setPopupOn=true"
+                  @click="selectedDevice = dock, setPopupOn=true, getThisData(dock.device_no)"
                 >
                   <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.dq_no }}</td>
                   <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.ship_no }}</td>
@@ -92,12 +92,12 @@
             </thead>
 
             <tbody>
-              <tr>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">20.9<sub>%</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">0<sub>%</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">0<sub>ppm</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">0<sub>ppm</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">0<sub>%</sub></td>
+              <tr v-if="thisDeviceData">
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0].O2 }}<sub>%</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0].CO2 }}<sub>%</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0].CO }}<sub>ppm</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0].H2S }}<sub>ppm</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0].CH4 }}<sub>%</sub></td>
               </tr>
 
               <tr>
@@ -148,6 +148,7 @@ import AppHeader from '../components/AppHeader.vue';
 import PrevButtons from '../components/PrevButtons.vue';
 import HalfSelectBox from '../components/HalfSelectBox.vue';
 import ApexCharts from "vue3-apexcharts";
+import axios from 'axios';
 
   export default {
     components: { AppHeader, PrevButtons, HalfSelectBox, HalfSelectBox, ApexCharts },
@@ -155,6 +156,18 @@ import ApexCharts from "vue3-apexcharts";
       goToGasmonitoring() {
         this.$router.push('/gas/monitoring');
       },
+      async getThisData(targetDevice) {
+        try {
+          const res = await axios.get(`/api/gas/log/this?targetDevice=${targetDevice}`);
+          const result = res.data;
+
+          this.thisDeviceData = result;
+          console.log(result);
+        } 
+        catch (error) {
+          console.error(error);
+        }
+      }
     },
     data () {
       return {
@@ -163,32 +176,33 @@ import ApexCharts from "vue3-apexcharts";
           { time: '23.06.20 13:51', device_no: 'E0002', dq_no: '8D', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
           { time: '23.06.20 13:53', device_no: 'E0003', dq_no: '8D', ship_no: 3293, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
           { time: '23.06.20 13:51', device_no: 'E0004', dq_no: '8D', ship_no: 3294, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
-          { time: '23.06.20 13:51', device_no: 'E0005', dq_no: '8D', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
+          { time: '23.06.20 13:51', device_no: 'F0010', dq_no: '8D', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
           { time: '23.06.20 13:51', device_no: 'E0006', dq_no: '8D', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
         ],
+        thisDeviceData: [],
         setPopupOn: false, // 클릭했을때 최신 로그로 그래프 만들기
         selectedDevice: {},
         options : {
             series: [{
             name: 'O2',
-            type: 'line',
-            data: [20.9, 20.9, 20.9, 20.9, 20.9, 20.9, 20.9, 20.9]
+            type: 'column',
+            data: [20.9]
           }, {
             name: 'CO2',
-            type: 'line',
-            data: [1.1, 3, 3.1, 4, 4.1, 4.9, 6.5, 8.5]
+            type: 'column',
+            data: [1]
           }, {
             name: 'CO',
-            type: 'column',
-            data: [0, 0, 0, 0, 0, 0, 0, 0]
+            type: 'line',
+            data: [0]
           }, {
             name: 'H2S',
-            type: 'column',
-            data: [0, 0, 2, 3, 4, 3, 1, 0]
+            type: 'line',
+            data: [0]
           }, {
             name: 'CH4',
-            type: 'column',
-            data: [3, 2.5, 2, 1.2, 2, 1, 0, 0]
+            type: 'line',
+            data: [0]
           }],
             chart: {
             height: 350,

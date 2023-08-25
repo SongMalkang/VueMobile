@@ -4,7 +4,7 @@
     <slot></slot>
     <HomeIcon class="text-sky-900 w-7 overflow-hidden rounded-lg" @click="goToHome">Home</HomeIcon>
   </div>
-  <SideBarNavigate v-show="showSidebar" class="fixed z-50"></SideBarNavigate>
+  <SideBarNavigate @click="showSidebar=CSSFontFeatureValuesRule" v-show="showSidebar" class="fixed z-50"></SideBarNavigate>
 </template>
 
 <script>
