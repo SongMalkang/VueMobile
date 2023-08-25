@@ -43,8 +43,8 @@
             <td class="w-4/24 bg-red-600 border-[1px] border-red-700 py-2">밸브<br />제어</td>
           </tr>
         </thead>
-        <tbody>
-          <tr class="">
+        <tbody class="text-black">
+          <tr class="text-black">
             <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
             <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
             <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>

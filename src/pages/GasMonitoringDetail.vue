@@ -26,41 +26,54 @@
         </HalfSelectBox>
       </div>
 
-      <table class="table-auto w-[94vw] overflow-y-scroll mt-5 text-[3.5vw] text-white text-ellipsis">
-        <thead>
-          <th class="px-1 border-y-2 border-sky-900 bg-sky-600 py-2 w-3/12">수신 시각</th>
-          <th class="px-1 border-y-2 border-sky-900 bg-sky-600 py-2 w-1/12">장비</th>
-          <th class="px-1 border-y-2 border-sky-900 bg-sky-600 py-2 w-1/12">호선</th>
-          <th class="px-1 border-y-2 border-sky-900 bg-sky-600 py-2 w-5/12">위치</th>
-          <th class="px-1 border-y-2 border-sky-900 bg-sky-600 py-2 w-1/12">가스</th>
-          <th class="px-1 border-y-2 border-sky-900 bg-sky-600 py-2 w-1/12">장치</th>
-        </thead>
-        <tbody>
-          <transition-group name="blink">
-            <tr v-for="(dock, index) in allDockList"
-                :key="dock.device_no" 
-                class="border-y-2 text-[2vw]" 
-                :class="dock.device_no === 'E0001' ? 'text-yellow-500 font-bold' : 'text-black'"
-                @click="selectedDevice = dock, setPopupOn=true"
-            >
-              <td class="py-2 border-x-[1px] text-[2.5vw]">{{ dock.time }}</td>
-              <td class="py-2 border-x-[1px] text-[2.5vw]">{{ dock.device_no }}</td>
-              <td class="py-2 border-x-[1px] text-[2.5vw]">{{ dock.ship_no }}</td>
-              <td class="py-2 border-x-[1px] text-[2.5vw]">{{ dock.location }}</td>
-              <td class="py-2 border-x-[1px] text-[2.5vw]">{{ dock.gasStatus }}</td>
-              <td class="py-2 border-x-[1px] text-[2.5vw]">{{ dock.deviceStatus }}</td>
-            </tr>
-          </transition-group>
-        </tbody>
-      </table>
-      
-      <!-- 팝업창 -->
+      <div class="overflow-y-scroll h-[80vh]"> 
+        <table class="table-auto w-[94vw] mt-5 text-[3.5vw] text-white text-ellipsis">
+          <thead>
+            <th class="px-1 border-y-2 border-l-2 border-sky-900 bg-sky-700 py-2 w-1/12">도크</th>
+            <th class="px-1 border-y-2 border-sky-900 bg-sky-700 py-2 w-1/12">호선</th>
+            <th class="px-1 border-y-2 border-sky-900 bg-sky-700 py-2 w-2/12">O2<br />(%)</th>
+            <th class="px-1 border-y-2 border-sky-900 bg-sky-700 py-2 w-2/12">CO2<br />(%)</th>
+            <th class="px-1 border-y-2 border-sky-900 bg-sky-700 py-2 w-2/12">CO<br />(ppm)</th>
+            <th class="px-1 border-y-2 border-sky-900 bg-sky-700 py-2 w-2/12">H2S<br />(ppm)</th>
+            <th class="px-1 border-y-2 border-sky-900 bg-sky-700 py-2 w-2/12">CH4<br />(%)</th>
+            <th class="px-1 border-y-2 border-sky-900 bg-sky-700 py-2 w-1/12">장치번호</th>
+          </thead>
+          <tbody>
+            <transition-group name="blink">
+              <template v-for="(dock, index) in allDockList" :key="'row-' + dock.device_no" >
+                <tr>
+                  <td class="px-2 py-1 text-black font-bold bg-slate-200 text-[3.5vw] text-left border-x-2 border-sky-800" colspan="9">
+                    수신 시각 : {{ dock.time }} <br /> 상세 위치 : {{ dock.location }}
+                  </td>
+                </tr>
+                <tr 
+                  class="border-b-2 border-r-2 border-l-2 border-slate-900 text-[2vw]" 
+                  :class="dock.device_no === 'E0001' ? 'text-yellow-500 font-bold' : 'text-black'"
+                  @click="selectedDevice = dock, setPopupOn=true"
+                >
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.dq_no }}</td>
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.ship_no }}</td>
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.o2value }}</td>
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.co2value }}</td>
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.covalue }}</td>
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.h2svalue }}</td>
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.ch4value }}</td>
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.device_no }}</td>
+                </tr>
+              </template>
+            </transition-group>
+
+          </tbody>
+        </table>
+      </div>
+        
+        <!-- 팝업창 -->
       <div v-if="setPopupOn" class="absolute w-[90vw] h-[85vh] bg-slate-100 bottom-0 rounded-2xl overflow-hidden text-white">
 
         <div class="flex flex-col w-[90vw] bg-sky-800 h-[6vh]">
             <div class="flex flex-row font-bold justify-between px-8 text-[6vw] items-center" @click="setPopupOn=false">
                 <!-- Use 'items-center' in the parent flex container to align children vertically -->
-                <span class="flex items-center mt-[1vh]">{{ selectedDevice.dock_no }}D / {{ selectedDevice.ship_no }} / {{ selectedDevice.device_no }}</span>
+                <span class="flex items-center mt-[1vh]">{{ selectedDevice.dq_no }} / {{ selectedDevice.ship_no }} / {{ selectedDevice.device_no }}</span>
                 <span class="flex items-center mt-[1vh]">X</span>
             </div>
         </div>
@@ -146,12 +159,12 @@ import ApexCharts from "vue3-apexcharts";
     data () {
       return {
         allDockList: [
-          { time: '2023.06.20 13:51', device_no: 'E0001', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.2 LFO SVT', gasStatus: 'OK', deviceStatus: 'OK', dock_no: '8' },
-          { time: '2023.06.20 13:51', device_no: 'E0002', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', gasStatus: 'OK', deviceStatus: 'OK', dock_no: '8' },
-          { time: '2023.06.20 13:53', device_no: 'E0003', ship_no: 3293, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', gasStatus: 'OK', deviceStatus: 'OK', dock_no: '8' },
-          { time: '2023.06.20 13:51', device_no: 'E0004', ship_no: 3294, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', gasStatus: 'OK', deviceStatus: 'OK', dock_no: '4' },
-          { time: '2023.06.20 13:51', device_no: 'E0005', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', gasStatus: 'OK', deviceStatus: 'OK', dock_no: '4' },
-          { time: '2023.06.20 13:51', device_no: 'E0006', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', gasStatus: 'OK', deviceStatus: 'OK', dock_no: '4' },
+          { time: '23.06.20 13:51', device_no: 'E0001', dq_no: '8D', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.2 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
+          { time: '23.06.20 13:51', device_no: 'E0002', dq_no: '8D', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
+          { time: '23.06.20 13:53', device_no: 'E0003', dq_no: '8D', ship_no: 3293, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
+          { time: '23.06.20 13:51', device_no: 'E0004', dq_no: '8D', ship_no: 3294, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
+          { time: '23.06.20 13:51', device_no: 'E0005', dq_no: '8D', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
+          { time: '23.06.20 13:51', device_no: 'E0006', dq_no: '8D', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
         ],
         setPopupOn: false, // 클릭했을때 최신 로그로 그래프 만들기
         selectedDevice: {},
