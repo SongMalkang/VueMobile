@@ -73,7 +73,7 @@
       <div v-if="setPopupOn" class="absolute w-[90vw] h-[85vh] bg-slate-100 bottom-0 rounded-2xl overflow-hidden text-white">
 
         <div class="flex flex-col w-[90vw] bg-sky-800 h-[6vh]">
-            <div class="flex flex-row font-bold justify-between px-8 text-[6vw] items-center" @click="setPopupOn=false">
+            <div class="flex flex-row font-bold justify-between px-8 text-[6vw] items-center" @click="setPopupOn=false, selectedDevice=undefined">
                 <span 
                   class="flex items-center mt-[1vh]"
                   >{{ selectedDevice.MNGR_AREA }} / {{ selectedDevice.SHIP_NO }} / {{ selectedDevice.SENS_KIND }}{{ selectedDevice.SENS_NO }}
@@ -97,11 +97,11 @@
 
             <tbody>
               <tr v-if="selectedDevice">
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ selectedDevice?.O2 }}<sub>%</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ selectedDevice?.CO2 }}<sub>%</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ selectedDevice?.CO }}<sub>ppm</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ selectedDevice?.H2S }}<sub>ppm</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ selectedDevice?.CH4 }}<sub>%</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0]?.O2 }}<sub>%</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0]?.CO2 }}<sub>%</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0]?.CO }}<sub>ppm</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0]?.H2S }}<sub>ppm</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0]?.CH4 }}<sub>%</sub></td>
               </tr>
 
               <tr>
@@ -222,7 +222,7 @@ import axios from 'axios';
       this.getAllData()
 
       this.interval = setInterval(() => {
-        this.getThisData(this.selectedDevice.device_no)
+        this.selectedDevice && this.getThisData(`${this.selectedDevice.SENS_KIND}${this.selectedDevice.SENS_NO}`)
         this.getAllData()
         // this.updateSelectedDevice();
       }, 5000);
