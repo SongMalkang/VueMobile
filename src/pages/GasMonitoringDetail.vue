@@ -41,8 +41,8 @@
           <tbody>
             <transition-group name="blink">
               <template v-for="(dock, index) in allDockList" :key="'row-' + dock.device_no" >
-                <tr>
-                  <td class="px-2 py-1 text-black font-bold bg-slate-200 text-[3.5vw] text-left border-x-2 border-sky-800" colspan="9">
+                <tr class="blink">
+                  <td class="px-2 py-1 text-black font-bold bg-slate-200 text-[3.8vw] text-left border-x-2 border-sky-800" colspan="9">
                     수신 시각 : 
                     {{ dock.CHK_TIME.substring(0,4) }}/{{ dock.CHK_TIME.substring(4,6) }}/{{ dock.CHK_TIME.substring(6,8) }}  
                     {{ dock.CHK_TIME.substring(8,10) }}:{{ dock.CHK_TIME.substring(10,12) }}:{{ dock.CHK_TIME.substring(12,14) }} 
@@ -198,16 +198,20 @@ import axios from 'axios';
         }
       },
 
-      async updateSelectedDevice() {
-        try {
-          const res = await axios.get(`/api/gas/log/recent`);
-          const result = res.data;
-          this.selectedDevice = result[0]; // Assuming you want to update the first device
-          console.log(result);
-        } catch (error) {
-          console.error(error);
-        }
-      },
+      // async updateSelectedDevice() {
+      //   if(this.selectedDevice === undefined) {
+      //     return;
+      //   }
+
+      //   try {
+      //     const res = await axios.get(`/api/gas/log/recent`);
+      //     const temp = res.data.find((x)=>x.SENS_KIND === this.selectedDevice.SENS_KIND && x.sens_no === this.SENS_NO )
+          
+      //     this.selectedDevice = temp
+      //   } catch (error) {
+      //     console.error(error);
+      //   }
+      // },
 
       parseData(type) {
         console.log(type)
@@ -220,19 +224,23 @@ import axios from 'axios';
       this.interval = setInterval(() => {
         this.getThisData(this.selectedDevice.device_no)
         this.getAllData()
-        this.updateSelectedDevice();
+        // this.updateSelectedDevice();
       }, 5000);
 
       this.currentPath = this.$route.path;
       
     },
+
+    computed: {
+    },
+
     data () {
       return {
         allDockList: [],
         interval: null,
         thisDeviceData: [],
         setPopupOn: false, // 클릭했을때 최신 로그로 그래프 만들기
-        selectedDevice: {},
+        selectedDevice: undefined,
         options : {
             series: [{
             name: 'O2',
@@ -453,13 +461,15 @@ import axios from 'axios';
 }
 
 .blink {
-  animation: blink 0.5s linear infinite;
+  animation: blink 0.3s infinite;
 }
 
-.blink-enter-active, .blink-leave-active {
-  animation: blink 0.5s;
+.blink-enter-active,
+.blink-leave-active {
+  animation: blink 0.3s;
 }
-.blink-enter, .blink-leave-to {
+.blink-enter,
+.blink-leave-to {
   opacity: 1;
 }
 
