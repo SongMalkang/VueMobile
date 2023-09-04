@@ -175,27 +175,8 @@ import axios from 'axios';
         }
       },
       parseData(type) {
-        console.log(this.selectedDevice)
-        if(!this.selectedDevice) {
-          return [0, 0, 0, 0, 0]
-        }else if(type='O2') {
-          return [this.selectedDevice[4].O2, this.selectedDevice[3].O2, this.selectedDevice[2].O2, this.selectedDevice[1].O2, this.selectedDevice[0].O2] ;
-        }
-        else if(type='CO2') {
-          return [this.selectedDevice[4].CO2, this.selectedDevice[3].CO2, this.selectedDevice[2].CO2, this.selectedDevice[1].CO2, this.selectedDevice[0].CO2] ;
-        }
-        else if(type='CO') {
-          return [this.selectedDevice[4].CO, this.selectedDevice[3].CO, this.selectedDevice[2].CO, this.selectedDevice[1].CO, this.selectedDevice[0].CO] ;
-        }
-        else if(type='H2S') {
-          return [this.selectedDevice[4].H2S, this.selectedDevice[3].H2S, this.selectedDevice[2].H2S, this.selectedDevice[1].H2S, this.selectedDevice[0].H2S] ;
-        }
-        else if(type='CH4') {
-          return [this.selectedDevice[4].CH4, this.selectedDevice[3].CH4, this.selectedDevice[2].CH4, this.selectedDevice[1].CH4, this.selectedDevice[0].CH4] ;
-        }
-        else if(type='time') {
-          return [this.selectedDevice[4].CHK_TIME, this.selectedDevice[3].CHK_TIME, this.selectedDevice[2].CHK_TIME, this.selectedDevice[1].CHK_TIME, this.selectedDevice[0].CHK_TIME] ;
-        }
+        console.log(type)
+        console.log(this.thisDeviceData)
       }
     },
     mounted() {

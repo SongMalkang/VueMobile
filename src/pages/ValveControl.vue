@@ -27,13 +27,60 @@
         <span class="text-[4.5vw]">밸브 제어 창</span>
         <span @click="vvControlWindow=false">X</span>
       </div>
-      <div class="flex flex-col bg-zinc-50 w-[100vw] h-[50vh] text-[6vw] font-bold text-black">
-        <span>8D - E27 - N0001</span>
+      <div class="flex flex-col bg-zinc-50 justify-between py-4 w-[100vw] h-[50vh] text-[6vw] font-bold text-black">
+        <div class="flex flex-row w-full my-[1vh] h-[15vh]">
+          <div class="w-1/2 flex flex-col justify-center align-middle border-2" :class="{ 'bg-sky-400' : o2valveStatus, 'bg-orange-400' : !o2valveStatus }">
+            산소 밸브<br />{{ o2valveStatus ? '(열림)' : '(닫힘)' }}
+          </div>
+          <div class="w-1/2 flex flex-col items-center justify-center align-middle border-2">
+            <div 
+              :class="{ 'text-zinc-300' : o2valveStatus }" 
+              class="w-full h-full items-center align-middle flex justify-center border-2"
+              @click=showConfirm(0)
+              >열기</div>
+            <div 
+              :class="{ 'text-zinc-300' : !o2valveStatus }" 
+              class="w-full h-full items-center align-middle flex justify-center border-2"
+              @click=showConfirm(0)
+              >닫기</div>
+          </div>
+        </div>
+
+        <div class="flex flex-row w-full  my-[1vh] h-[15vh]">
+          <div class="w-1/2 flex flex-col justify-center align-middle border-2" :class="{ 'bg-sky-400' : ethyvalveStatus, 'bg-orange-400' : !ethyvalveStatus }">
+            에틸렌 밸브<br />{{ ethyvalveStatus ? '(열림)' : '(닫힘)' }}
+          </div>
+          <div class="w-1/2 flex flex-col items-center justify-center align-middle border-2">
+            <div 
+              :class="{ 'text-zinc-300' : ethyvalveStatus }" 
+              class="w-full h-full items-center align-middle flex justify-center border-2"
+              @click=showConfirm(1)
+              >열기
+            </div>
+            <div 
+              :class="{ 'text-zinc-300' : !ethyvalveStatus }" 
+              class="w-full h-full items-center align-middle flex justify-center border-2"
+              @click=showConfirm(1)
+              >닫기
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-row w-full  my-[1vh] h-[15vh]">
+          <div class="w-1/2 flex flex-col justify-center align-middle border-2">
+            전체 밸브
+          </div>
+          <div class="w-1/2 flex flex-col items-center justify-center align-middle border-2">
+            <div class="w-full h-full items-center align-middle flex justify-center border-2">열기</div>
+            <div class="w-full h-full items-center align-middle flex justify-center border-2">닫기</div>
+          </div>
+        </div>
+        
       </div>
     </div>
 
     <div class="overflow-y-scroll h-[85vh] overflow-x-hidden">
-      <table class="table table-auto mx-[4vw] w-[92vw] bg-black">
+      <table class="table table-auto mx-[4vw] w-[92vw] bg-zinc-50">
         <thead>
           <tr class="w-full text-white font-bold">
             <td class="w-3/24 bg-sky-600 border-[1px] border-sky-700 py-2">장치</td>
@@ -44,107 +91,29 @@
           </tr>
         </thead>
         <tbody class="text-black">
-          <tr class="text-black">
-            <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">닫힘</td>
-            <td @click="vvControlWindow=true" class="py-[1vh] border-[1px] bg-zinc-200 font-bold">클릭</td>
-          </tr>
-          <tr class="">
-            <td class="py-[1vh] border-[1px] bg-zinc-400">N0001</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-400">8도크 - E37<br />23.08.22 14:00</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-400 font-bold">열림</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-400 font-bold">닫힘</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-400 font-bold">-</td>
-          </tr>
-          <tr class="">
-            <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">닫힘</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">클릭</td>
-          </tr>
-          <tr class="">
-            <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">닫힘</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">클릭</td>
-          </tr>
-          <tr class="">
-            <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">닫힘</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">클릭</td>
-          </tr>
-          <tr class="">
-            <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">닫힘</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">클릭</td>
-          </tr>
-          <tr class="">
-            <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">닫힘</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">클릭</td>
-          </tr>
-          <tr class="">
-            <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">닫힘</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">클릭</td>
-          </tr>
-          <tr class="">
-            <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">닫힘</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">클릭</td>
-          </tr>
-          <tr class="">
-            <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">닫힘</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">클릭</td>
-          </tr>
-          <tr class="">
-            <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">닫힘</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">클릭</td>
-          </tr>
-          <tr class="">
-            <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">닫힘</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">클릭</td>
-          </tr>
-          <tr class="">
-            <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">닫힘</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">클릭</td>
-          </tr>
-          <tr class="">
-            <td class="py-[1vh] border-[1px] bg-zinc-50">N0001</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50">8도크 - E37<br />23.08.22 14:00</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">열림</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">닫힘</td>
-            <td class="py-[1vh] border-[1px] bg-zinc-50 font-bold">클릭</td>
+          <tr v-for="(item, index) in responseData" :key="index">
+            <td class="py-[1vh] border-[1px] bg-zinc-50">{{ item.SENSORID }}</td>
+            <td class="py-[1vh] border-[1px] bg-zinc-50">{{ item.DQ_NO.substring(0,1) }}도크 - {{ item.DQ_ZONE }}{{ item.DQ_LOTADR }}<br />{{ item.formattedDate }}</td>
+            <td
+              class="py-[1vh] border-[1px] bg-zinc-50 font-bold"
+              :class="{ 'text-sky-600': item.VALVE_0 === 1, 'text-orange-600': item.VALVE_0 === 0 }"
+            >
+              {{ item.VALVE_0 === 1 ? '열림' : '닫힘' }}
+            </td>
+
+            <td
+              class="py-[1vh] border-[1px] font-bold"
+              :class="{ 'text-sky-600': item.VALVE_1 === 1, 'text-orange-600': item.VALVE_1 === 0 }"
+            >
+              {{ item.VALVE_1 === 1 ? '열림' : '닫힘' }}
+            </td>
+            <td @click="openControlWindow(item)" class="py-[1vh] border-[1px] bg-zinc-100 text-red-600 font-bold">클릭</td>
           </tr>
         </tbody>
       </table>
     </div>
+
+    
   </div>
 </template>
 
@@ -153,25 +122,85 @@ import AppHeader from '../components/AppHeader.vue';
 import HalfSelectBox from '../components/HalfSelectBox.vue'
 import PrevButtons from '../components/PrevButtons.vue';
 import ValveStatusCard from '../components/ValveStatusCard.vue';
+import axios from 'axios'
 
   export default {
     components: { AppHeader, HalfSelectBox, ValveStatusCard, PrevButtons },
     data() {
       return {
+        responseData: [],
         vvControlWindow: false,
 
+        o2valveStatus: 0,
+        ethyvalveStatus: 0,
+
+        actionDevice: 0,
+        actionValve: 0,
+        actionType: 0,
       }
     },
+
     methods: {
       goBack() {
         this.$router.go(-1)
       },
+      async recentValveLog() {
+        try {
+          const res = await axios.get("/api/valve/log/recent");
+          this.responseData = res.data.map((item) => {
+            const formattedDateString = formatDateString(item.INSERT_DATE);
 
+            return {
+              ...item,
+              formattedDate: formattedDateString,
+            };
+          });
+
+          function formatDateString(dateString) {
+            const date = new Date(dateString);
+            const year = date.getUTCFullYear().toString().slice(-2); // Get last 2 digits of the year
+            const month = (date.getUTCMonth() + 1).toString().padStart(2, '0'); // Add 1 to month (0-indexed) and ensure 2-digit format
+            const day = date.getUTCDate().toString().padStart(2, '0'); // Ensure 2-digit format
+            const hours = date.getUTCHours().toString().padStart(2, '0'); // Ensure 2-digit format
+            const minutes = date.getUTCMinutes().toString().padStart(2, '0'); // Ensure 2-digit format
+            const seconds = date.getUTCSeconds().toString().padStart(2, '0'); // Ensure 2-digit format
+
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+          }
+
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      openControlWindow(item) {
+        this.updateO2ValveStatus(item.VALVE_0, item.VALVE_1)
+        this.actionDevice = item.SENSORID
+        this.vvControlWindow = true
+      },
+      async updateO2ValveStatus(o2, ethy) {
+        this.o2valveStatus = o2;
+        this.ethyvalveStatus = ethy;
+      },
+      showConfirm(targetValve) {
+        const result = window.confirm(`${targetValve ? '에틸렌' : '산소'} 밸브를 제어하시겠습니까? 제어신호는 30초에 한번만 전송 가능합니다.`);
+        
+        if (result) {
+          alert('제어 신호가 정상적으로 전달되었습니다');
+          this.vvControlWindow=false
+        } 
+      },
     },
-    mounted() {
 
+    mounted() {
+      this.recentValveLog();
+      this.interval = setInterval(() => {
+        this.recentValveLog();
+      }, 5000);
     },
   }
+
+  
+
 </script>
 
 <style lang="scss" scoped>
