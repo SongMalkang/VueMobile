@@ -6,16 +6,16 @@
 
     <div class="flex flex-row justify-between mx-[5vw] py-[2vh]">
       <PrevButtons @click="goBack" />
-      <HalfSelectBox>
-        <option>전체 Dock</option>
-        <option>1도크</option>
-        <option>2도크</option>
-        <option>3도크</option>
-        <option>4도크</option>
-        <option>5도크</option>
-        <option>8도크</option>
-        <option>9도크</option>
-        <option>H도크</option>
+      <HalfSelectBox v-model="selectedOption" @change="updateValue">
+        <option value="A" selected>전체 도크</option>
+        <option value="1D">1도크</option>
+        <option value="2D">2도크</option>
+        <option value="3D">3도크</option>
+        <option value="4D">4도크</option>
+        <option value="5D">5도크</option>
+        <option value="8D">8도크</option>
+        <option value="9D">9도크</option>
+        <option value="HD">H도크</option>
       </HalfSelectBox>
       <div class="bg-sky-600 text-white font-bold text-[4vw] rounded-xl grid place-items-center">
         <span class="px-[4vw]">조회</span>
@@ -24,7 +24,7 @@
 
     <div v-if="vvControlWindow" class="absolute w-[100vw] h-[60vh] top-[20vh] border-y-4 border-sky-800 bg-sky-600 text-white font-bold">
       <div class="flex flex-row px-[5vw] py-[1vh] justify-between w-[100vw]">
-        <span class="text-[4.5vw]">밸브 제어 창</span>
+        <span class="text-[5vw]">{{ actionDevice }} / 밸브 제어 창</span>
         <span @click="vvControlWindow=false">X</span>
       </div>
       <div class="flex flex-col bg-zinc-50 justify-between py-4 w-[100vw] h-[50vh] text-[6vw] font-bold text-black">
@@ -91,7 +91,7 @@
           </tr>
         </thead>
         <tbody class="text-black">
-          <tr v-for="(item, index) in responseData" :key="index">
+          <tr v-for="(item, index) in responseData" :key="index" class="border-[1px]">
             <td class="py-[1vh] border-[1px] bg-zinc-50">{{ item.SENSORID }}</td>
             <td class="py-[1vh] border-[1px] bg-zinc-50">{{ item.DQ_NO.substring(0,1) }}도크 - {{ item.DQ_ZONE }}{{ item.DQ_LOTADR }}<br />{{ item.formattedDate }}</td>
             <td
@@ -107,7 +107,7 @@
             >
               {{ item.VALVE_1 === 1 ? '열림' : '닫힘' }}
             </td>
-            <td @click="openControlWindow(item)" class="py-[1vh] border-[1px] bg-zinc-100 text-red-600 font-bold">클릭</td>
+            <td @click="openControlWindow(item)" class="py-[1vh] border-[1px] border-red-800 bg-red-500 text-white font-bold">제어<br />버튼</td>
           </tr>
         </tbody>
       </table>
@@ -136,6 +136,8 @@ import axios from 'axios'
 
         actionDevice: 0,
         actionAddress: 0,
+
+        selectedOption: '',
       }
     },
 
@@ -157,14 +159,17 @@ import axios from 'axios'
 
           function formatDateString(dateString) {
             const date = new Date(dateString);
-            const year = date.getUTCFullYear().toString().slice(-2); // Get last 2 digits of the year
-            const month = (date.getUTCMonth() + 1).toString().padStart(2, '0'); // Add 1 to month (0-indexed) and ensure 2-digit format
-            const day = date.getUTCDate().toString().padStart(2, '0'); // Ensure 2-digit format
-            const hours = date.getUTCHours().toString().padStart(2, '0'); // Ensure 2-digit format
-            const minutes = date.getUTCMinutes().toString().padStart(2, '0'); // Ensure 2-digit format
-            const seconds = date.getUTCSeconds().toString().padStart(2, '0'); // Ensure 2-digit format
+            const options = {
+              year: '2-digit',
+              month: '2-digit',
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+              timeZone: 'Asia/Seoul', 
+            };
 
-            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            return date.toLocaleString('kr', options);
           }
           console.log(res.data)
 
@@ -189,7 +194,12 @@ import axios from 'axios'
           alert('제어 신호가 정상적으로 전달되었습니다');
           this.vvControlWindow=false
           console.log(this.actionAddress, this.actionDevice, targetValve, targetAction) // EDID, SENSORID, VALVE_0/1 , OPEN/CLOSE
+          // 무스마 API 추가
         } 
+      },
+      updateValue(event) {
+        this.$emit('input', event.target.value);
+        this.$emit('change', event.target.value);
       },
     },
 

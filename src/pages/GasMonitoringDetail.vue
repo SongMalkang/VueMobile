@@ -43,22 +43,24 @@
               <template v-for="(dock, index) in allDockList" :key="'row-' + dock.device_no" >
                 <tr>
                   <td class="px-2 py-1 text-black font-bold bg-slate-200 text-[3.5vw] text-left border-x-2 border-sky-800" colspan="9">
-                    수신 시각 : {{ dock.time }} <br /> 상세 위치 : {{ dock.location }}
+                    수신 시각 : 
+                    {{ dock.CHK_TIME.substring(0,4) }}/{{ dock.CHK_TIME.substring(4,6) }}/{{ dock.CHK_TIME.substring(6,8) }}  
+                    {{ dock.CHK_TIME.substring(8,10) }}:{{ dock.CHK_TIME.substring(10,12) }}:{{ dock.CHK_TIME.substring(12,14) }} 
+                    <br /> 상세 위치 : {{ dock.INST_DPOS }}
                   </td>
                 </tr>
                 <tr 
-                  class="border-b-2 border-r-2 border-l-2 border-slate-900 text-[2vw]" 
-                  :class="dock.device_no === 'E0001' ? 'text-yellow-500 font-bold' : 'text-black'"
-                  @click="selectedDevice = dock, setPopupOn=true, getThisData(selectedDevice.device_no)"
+                  class="border-b-2 border-r-2 border-l-2 border-slate-900 text-[2vw] text-black"
+                  @click="selectedDevice = dock, setPopupOn=true, getThisData(`${dock.SENS_KIND}${dock.SENS_NO}`)"
                 >
-                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.dq_no }}</td>
-                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.ship_no }}</td>
-                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.o2value }}</td>
-                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.co2value }}</td>
-                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.covalue }}</td>
-                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.h2svalue }}</td>
-                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.ch4value }}</td>
-                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.device_no }}</td>
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.MNGR_AREA }}</td>
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.SHIP_NO }}</td>
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.O2 }}%</td>
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.CO2 }}%</td>
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.CO }}ppm</td>
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.H2S }}ppm</td>
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.CH4 }}%</td>
+                  <td class="py-3 border-x-[1px] border-slate-200 text-[4vw]">{{ dock.SENS_KIND }}{{ dock.SENS_NO }}</td>
                 </tr>
               </template>
             </transition-group>
@@ -72,8 +74,10 @@
 
         <div class="flex flex-col w-[90vw] bg-sky-800 h-[6vh]">
             <div class="flex flex-row font-bold justify-between px-8 text-[6vw] items-center" @click="setPopupOn=false">
-                <!-- Use 'items-center' in the parent flex container to align children vertically -->
-                <span class="flex items-center mt-[1vh]">{{ selectedDevice.dq_no }} / {{ selectedDevice.ship_no }} / {{ selectedDevice.device_no }}</span>
+                <span 
+                  class="flex items-center mt-[1vh]"
+                  >{{ selectedDevice.MNGR_AREA }} / {{ selectedDevice.SHIP_NO }} / {{ selectedDevice.SENS_KIND }}{{ selectedDevice.SENS_NO }}
+                </span>
                 <span class="flex items-center mt-[1vh]">X</span>
             </div>
         </div>
@@ -92,19 +96,27 @@
             </thead>
 
             <tbody>
-              <tr v-if="thisDeviceData">
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0]?.O2 }}<sub>%</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0]?.CO2 }}<sub>%</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0]?.CO }}<sub>ppm</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0]?.H2S }}<sub>ppm</sub></td>
-                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ thisDeviceData[0]?.CH4 }}<sub>%</sub></td>
+              <tr v-if="selectedDevice">
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ selectedDevice?.O2 }}<sub>%</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ selectedDevice?.CO2 }}<sub>%</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ selectedDevice?.CO }}<sub>ppm</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ selectedDevice?.H2S }}<sub>ppm</sub></td>
+                <td class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-center py-2 text-[4.5vw]">{{ selectedDevice?.CH4 }}<sub>%</sub></td>
               </tr>
 
               <tr>
-                <td colspan="5" class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-left px-2 text-[3.7vw]">위치: E/R M/E L.O.WUMP TK No.2 LFO SVT</td>
+                <td 
+                  colspan="5" 
+                  class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-left px-2 text-[3.7vw]"
+                  >위치: {{ thisDeviceData[0]?.MNGR_AREA }} {{ thisDeviceData[0]?.INST_DPOS }}</td>
               </tr>
               <tr>
-                <td colspan="5" class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-left px-2 text-[3.7vw]">시각: 2023-08-23 09:16:38</td>
+                <td 
+                  colspan="5" 
+                  class="border-[1px] border-slate-600 bg-zinc-100 text-black font-bold text-left px-2 text-[3.7vw]"
+                  >수신 시각: 
+                    {{ thisDeviceData[0]?.CHK_TIME.substring(0,4) }}/{{ thisDeviceData[0]?.CHK_TIME.substring(4,6) }}/{{ thisDeviceData[0]?.CHK_TIME.substring(6,8) }}  
+                    {{ thisDeviceData[0]?.CHK_TIME.substring(8,10) }}:{{ thisDeviceData[0]?.CHK_TIME.substring(10,12) }}:{{ thisDeviceData[0]?.CHK_TIME.substring(12,14) }} </td>
               </tr>
               <tr>
                 <td colspan="5" class="border-[1px] border-slate-600 bg-sky-800 text-white font-bold text-center px-2 text-[4.5vw]">알람 기준 값</td>
@@ -174,15 +186,41 @@ import axios from 'axios';
           console.error(error);
         }
       },
+
+      async getAllData() {
+        try {
+          const res = await axios.get(`/api/gas/log/recent`);
+          const result = res.data;
+          this.allDockList = result;
+          console.log(result);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
+      async updateSelectedDevice() {
+        try {
+          const res = await axios.get(`/api/gas/log/recent`);
+          const result = res.data;
+          this.selectedDevice = result[0]; // Assuming you want to update the first device
+          console.log(result);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
       parseData(type) {
         console.log(type)
         console.log(this.thisDeviceData)
       }
     },
     mounted() {
+      this.getAllData()
 
       this.interval = setInterval(() => {
         this.getThisData(this.selectedDevice.device_no)
+        this.getAllData()
+        this.updateSelectedDevice();
       }, 5000);
 
       this.currentPath = this.$route.path;
@@ -190,14 +228,7 @@ import axios from 'axios';
     },
     data () {
       return {
-        allDockList: [
-          { time: '23.06.20 13:51', device_no: 'E0001', dq_no: '8D', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.2 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
-          { time: '23.06.20 13:51', device_no: 'E0002', dq_no: '8D', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
-          { time: '23.06.20 13:53', device_no: 'E0003', dq_no: '8D', ship_no: 3293, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
-          { time: '23.06.20 13:51', device_no: 'E0004', dq_no: '8D', ship_no: 3294, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
-          { time: '23.06.20 13:51', device_no: 'F0010', dq_no: '8D', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
-          { time: '23.06.20 13:51', device_no: 'E0006', dq_no: '8D', ship_no: 3291, location: 'E/R M/E L.O.WUMP TK No.1 LFO SVT', o2value: 20.9, co2value: 0, covalue: 0, h2svalue: 1, ch4value: 0 },
-        ],
+        allDockList: [],
         interval: null,
         thisDeviceData: [],
         setPopupOn: false, // 클릭했을때 최신 로그로 그래프 만들기
