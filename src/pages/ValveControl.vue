@@ -36,12 +36,12 @@
             <div 
               :class="{ 'text-zinc-300' : o2valveStatus }" 
               class="w-full h-full items-center align-middle flex justify-center border-2"
-              @click=showConfirm(0)
+              @click="o2valveStatus === 0 ? showConfirm(0, 1) : null"
               >열기</div>
             <div 
               :class="{ 'text-zinc-300' : !o2valveStatus }" 
               class="w-full h-full items-center align-middle flex justify-center border-2"
-              @click=showConfirm(0)
+              @click="o2valveStatus === 1 ? showConfirm(0, 0) : null"
               >닫기</div>
           </div>
         </div>
@@ -54,13 +54,13 @@
             <div 
               :class="{ 'text-zinc-300' : ethyvalveStatus }" 
               class="w-full h-full items-center align-middle flex justify-center border-2"
-              @click=showConfirm(1)
+              @click="ethyvalveStatus === 0 ? showConfirm(1, 1) : null"
               >열기
             </div>
             <div 
               :class="{ 'text-zinc-300' : !ethyvalveStatus }" 
               class="w-full h-full items-center align-middle flex justify-center border-2"
-              @click=showConfirm(1)
+              @click="ethyvalveStatus === 1 ? showConfirm(1, 0) : null"
               >닫기
             </div>
           </div>
@@ -135,8 +135,7 @@ import axios from 'axios'
         ethyvalveStatus: 0,
 
         actionDevice: 0,
-        actionValve: 0,
-        actionType: 0,
+        actionAddress: 0,
       }
     },
 
@@ -167,6 +166,7 @@ import axios from 'axios'
 
             return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
           }
+          console.log(res.data)
 
         } catch (error) {
           console.error(error);
@@ -175,18 +175,20 @@ import axios from 'axios'
       openControlWindow(item) {
         this.updateO2ValveStatus(item.VALVE_0, item.VALVE_1)
         this.actionDevice = item.SENSORID
+        this.actionAddress = item.EDID
         this.vvControlWindow = true
       },
       async updateO2ValveStatus(o2, ethy) {
         this.o2valveStatus = o2;
         this.ethyvalveStatus = ethy;
       },
-      showConfirm(targetValve) {
-        const result = window.confirm(`${targetValve ? '에틸렌' : '산소'} 밸브를 제어하시겠습니까? 제어신호는 30초에 한번만 전송 가능합니다.`);
+      showConfirm(targetValve, targetAction) {
+        const result = window.confirm(`${this.actionDevice}의 ${targetValve ? '에틸렌' : '산소'} 밸브를 제어하시겠습니까? 제어신호는 30초에 한번만 전송 가능합니다.`);
         
         if (result) {
           alert('제어 신호가 정상적으로 전달되었습니다');
           this.vvControlWindow=false
+          console.log(this.actionAddress, this.actionDevice, targetValve, targetAction) // EDID, SENSORID, VALVE_0/1 , OPEN/CLOSE
         } 
       },
     },
