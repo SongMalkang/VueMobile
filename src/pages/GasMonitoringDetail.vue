@@ -75,10 +75,10 @@
         <div class="flex flex-col w-[90vw] bg-sky-800 h-[6vh]">
             <div class="flex flex-row font-bold justify-between px-8 text-[6vw] items-center" @click="setPopupOn=false, selectedDevice=undefined">
                 <span 
-                  class="flex items-center mt-[1vh]"
-                  >{{ selectedDevice.MNGR_AREA }} / {{ selectedDevice.SHIP_NO }} / {{ selectedDevice.SENS_KIND }}{{ selectedDevice.SENS_NO }}
+                  class="flex items-center mt-[1vh] text-[5.5vw]"
+                  >{{ selectedDevice.MNGR_AREA }} / {{ selectedDevice.SHIP_NO }} / {{ selectedDevice.SENS_KIND === 'E' ? '흡입식' : '확산식' }} {{ selectedDevice.SENS_NO }}
                 </span>
-                <span class="flex items-center mt-[1vh]">X</span>
+                <span class="flex items-center mt-[1vh] text-white">X</span>
             </div>
         </div>
 
